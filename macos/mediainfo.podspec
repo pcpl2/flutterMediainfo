@@ -19,8 +19,9 @@ A new flutter plugin project.
   s.platform = :osx, '10.11'
   s.pod_target_xcconfig = {
     'DEFINES_MODULE' => 'YES',
-    'LIBRARY_SEARCH_PATHS' => '$(PODS_TARGET_SRCROOT)/libs',
+#    'LIBRARY_SEARCH_PATHS' => '$(PODS_TARGET_SRCROOT)/libs',
   }
   s.swift_version = '5.0'
-  s.vendored_libraries = '$(PODS_TARGET_SRCROOT)/libs/libmediainfo.dylib'
+#  s.vendored_libraries = '$(PODS_TARGET_SRCROOT)/libs/libmediainfo.dylib'
+  s.resources = ['libs/libmediainfo.dylib']
 end

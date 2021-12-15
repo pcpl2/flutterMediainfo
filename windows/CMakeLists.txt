@@ -22,3 +22,10 @@ set(mediainfo_bundled_libraries
   ""
   PARENT_SCOPE
 )
+
+set(INSTALL_BUNDLE_LIB_DIR "${CMAKE_INSTALL_PREFIX}")
+set(MediaInfo_BRIDGE "MediaInfo.dll")
+set(MediaInfo_BRIDGE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/libs/${MediaInfo_BRIDGE}")
+install(CODE "file(REMOVE_RECURSE \"${INSTALL_BUNDLE_LIB_DIR}/${MediaInfo_BRIDGE}\")" COMPONENT Runtime)
+install(FILES "${MediaInfo_BRIDGE_PATH}" DESTINATION "${INSTALL_BUNDLE_LIB_DIR}" COMPONENT Runtime)
+

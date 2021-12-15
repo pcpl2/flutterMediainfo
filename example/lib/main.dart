@@ -1,8 +1,9 @@
+import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:flutter/services.dart';
 import 'package:mediainfo/mediainfo.dart';
+import 'package:mediainfo/models/media_info_stream_type.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,34 +17,52 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
+  String _fileName = "";
+  String _filePath = "";
+  String _videoDuration = "Brak danych ";
+
+  Future<void> _openMp4File(BuildContext context) async {
+    final XTypeGroup typeGroup = XTypeGroup(
+      label: 'videos',
+      extensions: <String>['mp4'],
+    );
+    final List<XFile> files =
+        await openFiles(acceptedTypeGroups: <XTypeGroup>[typeGroup]);
+    if (files.isEmpty) {
+      // Operation was canceled by the user.
+      return;
+    }
+    final XFile file = files[0];
+    final String fileName = file.name;
+    final String filePath = file.path;
+
+    setState(() {
+      _fileName = fileName;
+      _filePath = filePath;
+    });
+
+    getFileData();
+  }
 
   @override
   void initState() {
     super.initState();
-    initPlatformState();
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    // We also handle the message potentially returning null.
-    try {
-      platformVersion =
-          await Mediainfo.platformVersion ?? 'Unknown platform version';
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
+  void getFileData() {
+    final mi = Mediainfo.init();
+    mi.quickLoad(_filePath);
 
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
+    final info_parameters = mi.option("Info_Parameters");
+    final info_codecs = mi.option("Info_Codecs");
+
+    final result = mi.getInfo(
+        MediaInfoStreamType.mediaInfoStreamVideo, 0, "Duration/String2");
 
     setState(() {
-      _platformVersion = platformVersion;
+      _videoDuration = result;
     });
+    mi.close();
   }
 
   @override
@@ -51,11 +70,23 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('Media Info Plugin example app'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
-        ),
+            child: Column(
+          children: [
+            Column(
+              children: [
+                Text("File: $_fileName"),
+                Text("Duration: $_videoDuration"),
+                MaterialButton(
+                  onPressed: () => _openMp4File(context),
+                  child: const Text("Get video data"),
+                )
+              ],
+            ),
+          ],
+        )),
       ),
     );
   }

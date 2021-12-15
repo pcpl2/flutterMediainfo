@@ -23,3 +23,13 @@ set(mediainfo_bundled_libraries
   ""
   PARENT_SCOPE
 )
+
+set(INSTALL_BUNDLE_LIB_DIR "${CMAKE_INSTALL_PREFIX}/lib")
+set(MediaInfo_BRIDGE "libmediainfo.so")
+set(LibZen_BRIDGE "libzen.so")
+set(MediaInfo_BRIDGE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/shared/${MediaInfo_BRIDGE}")
+set(LibZen_BRIDGE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/shared/${LibZen_BRIDGE}")
+install(CODE "file(REMOVE_RECURSE \"${INSTALL_BUNDLE_LIB_DIR}/${MediaInfo_BRIDGE}\")" COMPONENT Runtime)
+install(CODE "file(REMOVE_RECURSE \"${INSTALL_BUNDLE_LIB_DIR}/${LibZen_BRIDGE}\")" COMPONENT Runtime)
+install(FILES "${MediaInfo_BRIDGE_PATH}" DESTINATION "${INSTALL_BUNDLE_LIB_DIR}" COMPONENT Runtime)
+install(FILES "${LibZen_BRIDGE_PATH}" DESTINATION "${INSTALL_BUNDLE_LIB_DIR}" COMPONENT Runtime)

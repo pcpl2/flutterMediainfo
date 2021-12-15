@@ -18,6 +18,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+  file_selector: ^0.8.2+1
+  file_selector_linux: ^0.0.2+1
+  file_selector_macos: ^0.0.4+1
+  file_selector_windows: ^0.0.2+1
   mediainfo:
     # When depending on this package from a real application you should use:
     #   mediainfo: ^x.y.z
@@ -25,10 +29,6 @@ dependencies:
     # The example app is bundled with the plugin so we use a path dependency on
     # the parent directory to use the current plugin's version.
     path: ../
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
 
 dev_dependencies:
   flutter_test:
