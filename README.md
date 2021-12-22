@@ -15,8 +15,8 @@ dependencies:
 ### Example:
 
 ```dart
-import 'package:mediainfo/mediainfo.dart';
-import 'package:mediainfo/models/media_info_stream_type.dart';
+import 'package:flutter_media_info/mediainfo.dart';
+import 'package:flutter_media_info/models/media_info_stream_type.dart';
 
 void printVideoDuration() {
     final mi = Mediainfo.init();
