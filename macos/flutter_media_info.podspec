@@ -3,13 +3,13 @@
 # Run `pod lib lint mediainfo.podspec` to validate before publishing.
 #
 Pod::Spec.new do |s|
-  s.name             = 'mediainfo'
+  s.name             = 'flutter_media_info'
   s.version          = '0.0.1'
-  s.summary          = 'A new flutter plugin project.'
+  s.summary          = 'Library for use LibMediaInfo in flutter with support for macos, windows, linux.'
   s.description      = <<-DESC
-A new flutter plugin project.
+  Library for use LibMediaInfo in flutter with support for macos, windows, linux.
                        DESC
-  s.homepage         = 'http://example.com'
+  s.homepage         = 'https://pcpl2lab.ovh'
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'Your Company' => 'email@example.com' }
   s.source           = { :path => '.' }
@@ -19,9 +19,7 @@ A new flutter plugin project.
   s.platform = :osx, '10.11'
   s.pod_target_xcconfig = {
     'DEFINES_MODULE' => 'YES',
-#    'LIBRARY_SEARCH_PATHS' => '$(PODS_TARGET_SRCROOT)/libs',
   }
   s.swift_version = '5.0'
-#  s.vendored_libraries = '$(PODS_TARGET_SRCROOT)/libs/libmediainfo.dylib'
   s.resources = ['libs/libmediainfo.dylib']
 end

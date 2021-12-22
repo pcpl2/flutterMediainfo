@@ -21,8 +21,8 @@ flutter:
   plugin:
     platforms:
       linux:
-        pluginClass: MediainfoPlugin
+        pluginClass: FlutterMediaInfoPlugin
       macos:
-        pluginClass: MediainfoPlugin
+        pluginClass: FlutterMediaInfoPlugin
       windows:
-        pluginClass: MediainfoPlugin
+        pluginClass: FlutterMediaInfoPlugin

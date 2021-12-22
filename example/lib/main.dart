@@ -2,8 +2,8 @@ import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:mediainfo/mediainfo.dart';
-import 'package:mediainfo/models/media_info_stream_type.dart';
+import 'package:flutter_media_info/mediainfo.dart';
+import 'package:flutter_media_info/models/media_info_stream_type.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +19,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _fileName = "";
   String _filePath = "";
-  String _videoDuration = "Brak danych ";
+  String _videoDuration = "Missing data";
 
   Future<void> _openMp4File(BuildContext context) async {
     final XTypeGroup typeGroup = XTypeGroup(
@@ -70,7 +70,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Media Info Plugin example app'),
+          title: const Text('flutter_media_info example app'),
         ),
         body: Center(
             child: Column(

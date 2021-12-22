@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
-project(mediainfo_example LANGUAGES CXX)
+project(flutter_media_info_example LANGUAGES CXX)
 
-set(BINARY_NAME "mediainfo_example")
+set(BINARY_NAME "flutter_media_info_example")
 
 cmake_policy(SET CMP0063 NEW)
 

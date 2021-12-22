@@ -1,6 +1,6 @@
-# mediainfo_example
+# flutter_media_info_example
 
-Demonstrates how to use the mediainfo plugin.
+Demonstrates how to use the flutter_media_info plugin.
 
 ## Getting Started
 

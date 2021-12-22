@@ -1,17 +1,13 @@
 import 'dart:developer' as developer;
 
-import 'dart:async';
-
-import 'package:flutter/services.dart';
-
 import "dart:ffi";
 
 import "package:ffi/ffi.dart";
-import 'package:mediainfo/models/media_info_exceptions.dart';
-import 'package:mediainfo/models/media_info_info_type.dart';
-import 'package:mediainfo/models/media_info_stream_type.dart';
-import 'package:mediainfo/models/media_info_functions.dart';
-import 'package:mediainfo/utils.dart';
+import 'package:flutter_media_info/models/media_info_exceptions.dart';
+import 'package:flutter_media_info/models/media_info_info_type.dart';
+import 'package:flutter_media_info/models/media_info_stream_type.dart';
+import 'package:flutter_media_info/models/media_info_functions.dart';
+import 'package:flutter_media_info/utils.dart';
 
 // ignore: slash_for_doc_comments
 /**
@@ -42,12 +38,6 @@ class Mediainfo {
   ///...
   late MediaInfoGet _mediaInfoGet;
 
-  static const MethodChannel _channel = MethodChannel('mediainfo');
-
-  static Future<String?> get platformVersion async {
-    final String? version = await _channel.invokeMethod('getPlatformVersion');
-    return version;
-  }
 
   Mediainfo.init() {
     final dlPath = platformPath("");

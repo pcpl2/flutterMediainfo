@@ -1,13 +1,13 @@
 cmake_minimum_required(VERSION 3.15)
-set(PROJECT_NAME "mediainfo")
+set(PROJECT_NAME "flutter_media_info")
 project(${PROJECT_NAME} LANGUAGES CXX)
 
 # This value is used when generating builds using this plugin, so it must
 # not be changed
-set(PLUGIN_NAME "mediainfo_plugin")
+set(PLUGIN_NAME "flutter_media_info_plugin")
 
 add_library(${PLUGIN_NAME} SHARED
-  "mediainfo_plugin.cpp"
+  "flutter_media_info_plugin.cpp"
 )
 apply_standard_settings(${PLUGIN_NAME})
 set_target_properties(${PLUGIN_NAME} PROPERTIES
@@ -18,7 +18,7 @@ target_include_directories(${PLUGIN_NAME} INTERFACE
 target_link_libraries(${PLUGIN_NAME} PRIVATE flutter flutter_wrapper_plugin)
 
 # List of absolute paths to libraries that should be bundled with the plugin
-set(mediainfo_bundled_libraries
+set(flutterMediaInfo_bundled_libraries
   ""
   PARENT_SCOPE
 )

@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
 project(runner LANGUAGES CXX)
 
-set(BINARY_NAME "mediainfo_example")
-set(APPLICATION_ID "ovh.pcpl2lab.mediainfo")
+set(BINARY_NAME "flutter_media_info_example")
+set(APPLICATION_ID "ovh.pcpl2lab.flutter_media_info.flutter_media_info")
 
 cmake_policy(SET CMP0063 NEW)
 
