@@ -96,7 +96,7 @@ jobs:
       - name: Make zip file
         uses: papeloto/action-zip@v1
         with:
-          files: FlutterApp/build/windows/runner/Release/
+          files: example/build/windows/runner/Release/
           dest: FlutterMediaInfo_Example_Windows_x64.zip
 
       - name: Upload generated application to the artifacts.
