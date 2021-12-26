@@ -2,6 +2,8 @@ name: flutter_media_info
 description: Library for use LibMediaInfo in flutter with support for macos, windows, linux.
 version: 0.0.1
 homepage: https://pcpl2lab.ovh
+repository: https://github.com/pcpl2/flutterMediainfo
+issue_tracker: https://github.com/pcpl2/flutterMediainfo/issues
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
