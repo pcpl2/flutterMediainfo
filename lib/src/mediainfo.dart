@@ -43,7 +43,7 @@ class Mediainfo {
   Mediainfo.init({String? customDebugPath}) {
     try {
       if (Platform.isLinux || Platform.isAndroid) {
-        DynamicLibrary.open(getLibZen());
+        DynamicLibrary.open(getLibZen(customDebugPath: customDebugPath));
       }
 
       final dylib =

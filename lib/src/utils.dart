@@ -6,10 +6,18 @@ String platformDLPath({String? customDebugPath}) {
   const libName = "mediainfo";
   if (kDebugMode) {
     if (Platform.isLinux || Platform.isAndroid) {
-      return "lib$libName.so";
+      if (customDebugPath != null) {
+        return "$customDebugPath/lib$libName.so";
+      } else {
+        return "lib$libName.so";
+      }
     }
     if (Platform.isMacOS || Platform.isIOS) {
-      return "lib$libName.dylib";
+      if (customDebugPath != null) {
+        return "$customDebugPath/lib$libName.dylib";
+      } else {
+        return "lib$libName.dylib";
+      }
     }
     if (Platform.isWindows) {
       if (customDebugPath != null) {
@@ -33,9 +41,13 @@ String platformDLPath({String? customDebugPath}) {
   }
 }
 
-String getLibZen() {
-  if (Platform.isLinux || Platform.isAndroid) {
-    return path.join(Directory.current.path, "libzen.so.0");
+String getLibZen({String? customDebugPath}) {
+  if (Platform.isLinux) {
+    if (customDebugPath != null) {
+      return path.join(Directory.current.path, "$customDebugPath/libzen.so.0");
+    } else {
+      return path.join(Directory.current.path, "libzen.so.0");
+    }
   }
   throw Exception("Platform Not Supported: ${Platform.operatingSystem}");
 }
