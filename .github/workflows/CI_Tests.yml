@@ -1,0 +1,38 @@
+name: CI_Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  flutter_version: "2.8.1"
+
+jobs:
+  tests:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+        - os: windows-2019
+        - os: ubuntu-20.04
+        - os: macos-11
+        - os: macos-10.15
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+        
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: ${{ env.flutter_version }}
+          channel: 'stable'
+
+      - name: Restore packages
+        run: flutter pub get
+
+      - name: Analyze
+        run: flutter analyze
+
+      - name: Run tests
+        run: flutter test --coverage
