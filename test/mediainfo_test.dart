@@ -8,12 +8,24 @@ import "package:path/path.dart" as path;
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
+  late String _debugPath;
+
+  if (Platform.isLinux) {
+    _debugPath = "linux/libs/";
+  }
+  if (Platform.isMacOS) {
+    _debugPath = "macos/libs/";
+  }
+  if (Platform.isWindows) {
+    _debugPath = "windows/libs/";
+  }
+
   test('load mediainfo', () async {
-    Mediainfo.init(customDebugPath: "windows/libs/");
+    Mediainfo.init(customDebugPath: _debugPath);
   });
 
   test('mediainfo get version', () async {
-    final _mi = Mediainfo.init(customDebugPath: "windows/libs/");
+    final _mi = Mediainfo.init(customDebugPath: _debugPath);
     final optionResult = _mi.option("Info_Version");
 
     expect(optionResult, "MediaInfoLib - v21.09");
@@ -21,7 +33,7 @@ void main() {
 
   test('Get music data with quick load', () async {
     final musicPath = path.join(Directory.current.path, "assets/Beat_Thee.mp3");
-    final _mi = Mediainfo.init(customDebugPath: "windows/libs/");
+    final _mi = Mediainfo.init(customDebugPath: _debugPath);
     _mi.quickLoad(musicPath);
     expect(
         _mi.getInfo(
@@ -45,7 +57,7 @@ void main() {
 
   test('Get music data with open', () async {
     final musicPath = path.join(Directory.current.path, "assets/Beat_Thee.mp3");
-    final _mi = Mediainfo.init(customDebugPath: "windows/libs/");
+    final _mi = Mediainfo.init(customDebugPath: _debugPath);
     _mi.init();
     _mi.open(musicPath);
     expect(
