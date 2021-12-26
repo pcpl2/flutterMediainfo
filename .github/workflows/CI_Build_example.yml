@@ -19,22 +19,18 @@ jobs:
         - os: windows-2019
           build_target: windows
           build_path: build\windows\runner\Release
-          asset_extension: .zip
           target: Windows
         - os: ubuntu-20.04
           build_target: linux
           build_path: build/linux/x64/release/bundle
-          asset_extension: .tar.gz
           target: Linux
         - os: macos-11
           build_target: macos
           build_path: build/macos/Build/Products/Release
-          asset_extension: .zip
           target: macOS
         - os: macos-10.15
           build_target: macos
           build_path: build/macos/Build/Products/Release
-          asset_extension: .zip
           target: macOS
     steps:
       - name: Checkout the code
@@ -79,24 +75,15 @@ jobs:
           cd example
           flutter build -v ${{ matrix.build_target }} --release
 
-      - name: Compress build for Linux
-        if: matrix.target == 'Linux'
-        run: tar czf $GITHUB_WORKSPACE/FlutterMediaInfo_Example_${{ matrix.target }}.tar.gz *
-        working-directory: ${{ matrix.build_path }}
-
-      - name: Compress build for macOS
-        if: matrix.target == 'macOS'
-        run: ditto -c -k --sequesterRsrc --keepParent FlutterMediaInfo_Example.app $GITHUB_WORKSPACE/FlutterMediaInfo_Example_${{ matrix.target }}.zip
-        working-directory: ${{ matrix.build_path }}
-        
-      - name: Compress build for Windows
-        if: matrix.target == 'Windows'
-        run: compress-archive -Path * -DestinationPath ${env:GITHUB_WORKSPACE}\FlutterMediaInfo_Example_${{ matrix.target }}.zip
-        working-directory: ${{ matrix.build_path }}
+      - name: Make zip file
+        uses: papeloto/action-zip@v1
+        with:
+          files: ${{ matrix.build_path }}
+          dest: FlutterMediaInfo_Example_${{ matrix.target }}.zip
       
       - name: Upload generated application to the artifacts.
         uses: actions/upload-artifact@v2
         with:
           name: FlutterMediaInfo Example ${{ matrix.build_target }}
-          path: FlutterMediaInfo_Example_${{ matrix.target }}${{ matrix.asset_extension }}
+          path: FlutterMediaInfo_Example_${{ matrix.target }}.zip
           retention-days: 5
