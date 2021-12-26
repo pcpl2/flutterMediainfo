@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'dart:developer' as developer;
 
 import "dart:ffi";
