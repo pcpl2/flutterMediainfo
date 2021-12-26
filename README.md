@@ -9,7 +9,7 @@ Library for use [LibMediaInfo](https://mediaarea.net/en/MediaInfo) in flutter wi
 
 ```yaml
 dependencies:
-  flutter_media_info: ^0.0.1
+  flutter_media_info: ^0.0.2
 ```
 
 
