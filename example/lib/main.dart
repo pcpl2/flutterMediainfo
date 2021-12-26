@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter_media_info/mediainfo.dart';
-import 'package:flutter_media_info/models/media_info_stream_type.dart';
 
 void main() {
   runApp(const MyApp());

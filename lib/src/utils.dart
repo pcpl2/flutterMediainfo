@@ -2,7 +2,7 @@ import "dart:io" show Directory, Platform;
 import 'package:flutter/foundation.dart';
 import "package:path/path.dart" as path;
 
-String platformDLPath() {
+String platformDLPath({String? customDebugPath}) {
   const libName = "mediainfo";
   if (kDebugMode) {
     if (Platform.isLinux || Platform.isAndroid) {
@@ -12,7 +12,7 @@ String platformDLPath() {
       return "lib$libName.dylib";
     }
     if (Platform.isWindows) {
-      return "$libName.dll";
+      return "${customDebugPath ?? ""}/$libName.dll";
     }
     throw Exception("Platform Not Supported: ${Platform.operatingSystem}");
   } else {
@@ -31,7 +31,7 @@ String platformDLPath() {
 
 String getLibZen() {
   if (Platform.isLinux || Platform.isAndroid) {
-      return path.join(Directory.current.path, "libzen.so.0");
+    return path.join(Directory.current.path, "libzen.so.0");
   }
   throw Exception("Platform Not Supported: ${Platform.operatingSystem}");
 }
