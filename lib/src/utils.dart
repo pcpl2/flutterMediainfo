@@ -12,7 +12,11 @@ String platformDLPath({String? customDebugPath}) {
       return "lib$libName.dylib";
     }
     if (Platform.isWindows) {
-      return "${customDebugPath ?? ""}/$libName.dll";
+      if (customDebugPath != null) {
+        return "$customDebugPath/$libName.dll";
+      } else {
+        return "$libName.dll";
+      }
     }
     throw Exception("Platform Not Supported: ${Platform.operatingSystem}");
   } else {
