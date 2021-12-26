@@ -78,7 +78,7 @@ jobs:
       - name: Make zip file
         uses: papeloto/action-zip@v1
         with:
-          files: ${{ matrix.build_path }}
+          files: example/${{ matrix.build_path }}
           dest: FlutterMediaInfo_Example_${{ matrix.target }}.zip
       
       - name: Upload generated application to the artifacts.
