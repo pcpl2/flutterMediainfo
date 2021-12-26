@@ -52,16 +52,13 @@ class _MyAppState extends State<MyApp> {
     final mi = Mediainfo.init();
     mi.quickLoad(_filePath);
 
-    final info_parameters = mi.option("Info_Parameters");
-    final info_codecs = mi.option("Info_Codecs");
-
     final result = mi.getInfo(
         MediaInfoStreamType.mediaInfoStreamVideo, 0, "Duration/String2");
 
     setState(() {
       _videoDuration = result;
     });
-    mi.close();
+    mi.delete();
   }
 
   @override

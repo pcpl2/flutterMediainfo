@@ -17,6 +17,8 @@ void main() {
     final optionResult = _mi.option("Info_Version");
 
     expect(optionResult, "MediaInfoLib - v21.09");
+
+    _mi.delete();
   });
 
   test('Get music data with quick load', () async {
@@ -40,7 +42,7 @@ void main() {
             MediaInfoStreamType.mediaInfoStreamAudio, 0, "FrameRate/String"),
         "38.281 FPS (1152 SPF)");
 
-    _mi.close();
+    _mi.delete();
   });
 
   test('Get music data with open', () async {
@@ -66,5 +68,6 @@ void main() {
         "38.281 FPS (1152 SPF)");
 
     _mi.close();
+    _mi.delete();
   });
 }

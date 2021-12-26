@@ -5,3 +5,7 @@ class NotLoadedMediaInfoInstance implements Exception {
 class MediaInfoInstanceHasExist implements Exception {
   MediaInfoInstanceHasExist();
 }
+
+class FileHasNotLoaded implements Exception {
+  FileHasNotLoaded();
+}

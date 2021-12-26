@@ -112,6 +112,10 @@ class Mediainfo {
     if (_mi == null) {
       throw NotLoadedMediaInfoInstance();
     }
+
+    if (!fileOpened) {
+      throw FileHasNotLoaded();
+    }
     return _miGet(
       _mi!,
       streamType.index,
@@ -122,13 +126,26 @@ class Mediainfo {
     ).toDartString();
   }
 
+  void delete() {
+    if (_mi == null) {
+      throw NotLoadedMediaInfoInstance();
+    }
+
+    _miDelete(_mi!);
+    _mi = null;
+  }
+
   /// Close a file opened before with Open()
   void close() {
     if (_mi == null) {
       throw NotLoadedMediaInfoInstance();
     }
 
-    _miDelete(_mi!);
+    if (!fileOpened) {
+      throw FileHasNotLoaded();
+    }
+
+    _miClose(_mi!);
     fileOpened = false;
   }
 
