@@ -17,8 +17,6 @@ void main() {
     final optionResult = _mi.option("Info_Version");
 
     expect(optionResult, "MediaInfoLib - v21.09");
-
-    _mi.delete();
   });
 
   test('Get music data with quick load', () async {
