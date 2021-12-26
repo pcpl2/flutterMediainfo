@@ -83,7 +83,7 @@ jobs:
 
       - run: cd example && flutter packages get
 
-      - name: Build example for windwos
+      - name: Build example for windows
         run: | 
           cd example
           flutter build -v windows --release

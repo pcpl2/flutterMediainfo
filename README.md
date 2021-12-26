@@ -1,5 +1,5 @@
 # FlutterMediaInfo
-<img alt="GitHub" src="https://img.shields.io/github/license/pcpl2/flutterMediainfo">
+<img alt="GitHub" src="https://img.shields.io/github/license/pcpl2/flutterMediainfo"> [![Tests](https://github.com/pcpl2/flutterMediainfo/actions/workflows/CI_Tests.yml/badge.svg)](https://github.com/pcpl2/flutterMediainfo/actions/workflows/CI_Tests.yml) ![GitHub issues](https://img.shields.io/github/issues/pcpl2/flutterMediainfo)
 
 Library for use [LibMediaInfo](https://mediaarea.net/en/MediaInfo) in flutter with support for macos, windows, linux.
 
