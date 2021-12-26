@@ -1,6 +1,7 @@
 import 'dart:developer' as developer;
 
 import "dart:ffi";
+import 'dart:io';
 
 import "package:ffi/ffi.dart";
 import 'package:flutter_media_info/models/media_info_exceptions.dart';
@@ -37,10 +38,12 @@ class Mediainfo {
   late MediaInfoCountGet _miCountGet;
 
   Mediainfo.init() {
-    final dlPath = platformPath("");
-
     try {
-      final dylib = DynamicLibrary.open(dlPath);
+      if (Platform.isLinux || Platform.isAndroid) {
+        DynamicLibrary.open(getLibZen());
+      }
+
+      final dylib = DynamicLibrary.open(platformDLPath());
       _loadSymbols(dylib);
     } on Exception catch (e) {
       developer.log(e.toString());
