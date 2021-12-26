@@ -85,6 +85,7 @@ class Mediainfo {
     }
 
     _mi = _miNewQuick(path.toNativeUtf8(), options.toNativeUtf8());
+    fileOpened = true;
   }
 
   String option(String option, {String value = ""}) {
