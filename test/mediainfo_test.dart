@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_media_info/mediainfo.dart';
+import 'package:flutter_media_info/flutter_media_info.dart';
 
 import "package:path/path.dart" as path;
 
