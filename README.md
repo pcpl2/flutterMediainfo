@@ -1,4 +1,5 @@
 # FlutterMediaInfo
+<img alt="GitHub" src="https://img.shields.io/github/license/pcpl2/flutterMediainfo">
 
 Library for use [LibMediaInfo](https://mediaarea.net/en/MediaInfo) in flutter with support for macos, windows, linux.
 
