@@ -4,14 +4,14 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'flutter_media_info'
-  s.version          = '0.0.1'
+  s.version          = '0.0.2'
   s.summary          = 'Library for use LibMediaInfo in flutter with support for macos, windows, linux.'
   s.description      = <<-DESC
   Library for use LibMediaInfo in flutter with support for macos, windows, linux.
                        DESC
-  s.homepage         = 'https://pcpl2lab.ovh'
+  s.homepage         = 'https://github.com/pcpl2/flutterMediainfo'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Your Company' => 'email@example.com' }
+  s.author           = { 'Patryk "pcpl2" Ławicki' => 'pubdev@pcpl2.ovh' }
   s.source           = { :path => '.' }
   s.source_files     = 'Classes/**/*'
   s.dependency 'FlutterMacOS'
@@ -22,4 +22,5 @@ Pod::Spec.new do |s|
   }
   s.swift_version = '5.0'
   s.resources = ['libs/libmediainfo.dylib']
+  s.xcconfig = { 'LD_RUNPATH_SEARCH_PATHS' => '@loader_path/../Frameworks/flutter_media_info.framework/Resources' }
 end

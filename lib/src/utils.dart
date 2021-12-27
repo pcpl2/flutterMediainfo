@@ -14,9 +14,9 @@ String platformDLPath({String? customDebugPath}) {
     }
     if (Platform.isMacOS || Platform.isIOS) {
       if (customDebugPath != null) {
-        return "$customDebugPath/lib$libName.dylib";
+        return "$customDebugPath/lib$libName.0.dylib";
       } else {
-        return "lib$libName.dylib";
+        return "lib$libName.0.dylib";
       }
     }
     if (Platform.isWindows) {
@@ -32,7 +32,7 @@ String platformDLPath({String? customDebugPath}) {
       return path.join(Directory.current.path, "lib$libName.so");
     }
     if (Platform.isMacOS || Platform.isIOS) {
-      return path.join(Directory.current.path, "lib$libName.dylib");
+      return path.join(Directory.current.path, "lib$libName.0.dylib");
     }
     if (Platform.isWindows) {
       return path.join(Directory.current.path, "$libName.dll");
