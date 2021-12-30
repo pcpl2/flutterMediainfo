@@ -129,26 +129,15 @@ class Mediainfo {
     ).toDartString();
   }
 
+  // Remove mediainfo instance from memory
   void delete() {
-    if (_mi == null) {
-      throw NotLoadedMediaInfoInstance();
-    }
-
-    _miDelete(_mi!);
+    _miDelete(_mi ?? nullptr);
     _mi = null;
   }
 
   /// Close a file opened before with Open()
   void close() {
-    if (_mi == null) {
-      throw NotLoadedMediaInfoInstance();
-    }
-
-    if (!fileOpened) {
-      throw FileHasNotLoaded();
-    }
-
-    _miClose(_mi!);
+    _miClose(_mi ?? nullptr);
     fileOpened = false;
   }
 
