@@ -40,7 +40,22 @@ class Mediainfo {
   late MediaInfoStateGet _miStateGet;
   late MediaInfoCountGet _miCountGet;
 
+  @Deprecated("Use Mediainfo()")
   Mediainfo.init({String? customDebugPath}) {
+    try {
+      if (Platform.isLinux || Platform.isAndroid) {
+        DynamicLibrary.open(getLibZen(customDebugPath: customDebugPath));
+      }
+
+      final dylib =
+          DynamicLibrary.open(platformDLPath(customDebugPath: customDebugPath));
+      _loadSymbols(dylib);
+    } on Exception catch (e) {
+      developer.log(e.toString());
+    }
+  }
+
+  Mediainfo({String? customDebugPath}) {
     try {
       if (Platform.isLinux || Platform.isAndroid) {
         DynamicLibrary.open(getLibZen(customDebugPath: customDebugPath));
