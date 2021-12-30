@@ -49,7 +49,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   void getFileData() {
-    final mi = Mediainfo.init();
+    final mi = Mediainfo();
     mi.quickLoad(_filePath);
 
     final result = mi.getInfo(
