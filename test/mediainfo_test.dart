@@ -80,4 +80,11 @@ void main() {
     _mi.close();
     _mi.delete();
   });
+
+  test('Invalid usage close', () async {
+    final _mi = Mediainfo.init(customDebugPath: _debugPath);
+
+    _mi.close();
+    _mi.delete();
+  });
 }
