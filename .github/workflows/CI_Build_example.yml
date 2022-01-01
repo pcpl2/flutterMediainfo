@@ -76,7 +76,7 @@ jobs:
           flutter build -v ${{ matrix.build_target }} --release
 
       - name: Make zip file
-        uses: papeloto/action-zip@v1
+        uses: vimtor/action-zip@v1
         with:
           files: example/${{ matrix.build_path }}
           dest: FlutterMediaInfo_Example_${{ matrix.target }}.zip
