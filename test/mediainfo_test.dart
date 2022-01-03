@@ -21,11 +21,11 @@ void main() {
   }
 
   test('load mediainfo', () async {
-    Mediainfo.init(customDebugPath: _debugPath);
+    Mediainfo(customDebugPath: _debugPath);
   });
 
   test('mediainfo get version', () async {
-    final _mi = Mediainfo.init(customDebugPath: _debugPath);
+    final _mi = Mediainfo(customDebugPath: _debugPath);
     final optionResult = _mi.option("Info_Version");
 
     expect(optionResult, "MediaInfoLib - v21.09");
@@ -33,7 +33,7 @@ void main() {
 
   test('Get music data with quick load', () async {
     final musicPath = path.join(Directory.current.path, "assets/Beat_Thee.mp3");
-    final _mi = Mediainfo.init(customDebugPath: _debugPath);
+    final _mi = Mediainfo(customDebugPath: _debugPath);
     _mi.quickLoad(musicPath);
     expect(
         _mi.getInfo(
@@ -57,7 +57,7 @@ void main() {
 
   test('Get music data with open', () async {
     final musicPath = path.join(Directory.current.path, "assets/Beat_Thee.mp3");
-    final _mi = Mediainfo.init(customDebugPath: _debugPath);
+    final _mi = Mediainfo(customDebugPath: _debugPath);
     _mi.init();
     _mi.open(musicPath);
     expect(
@@ -76,6 +76,13 @@ void main() {
         _mi.getInfo(
             MediaInfoStreamType.mediaInfoStreamAudio, 0, "FrameRate/String"),
         "38.281 FPS (1152 SPF)");
+
+    _mi.close();
+    _mi.delete();
+  });
+
+  test('Invalid usage close', () async {
+    final _mi = Mediainfo(customDebugPath: _debugPath);
 
     _mi.close();
     _mi.delete();
