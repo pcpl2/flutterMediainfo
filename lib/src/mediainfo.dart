@@ -71,7 +71,7 @@ class Mediainfo {
 
   void init() {
     if (_mi != null) {
-      throw MediaInfoInstanceHasExist();
+      throw MediaInfoInstanceHasExists();
     }
 
     _mi = _miInit();
@@ -98,7 +98,7 @@ class Mediainfo {
 
   void quickLoad(String path, {String options = ""}) {
     if (_mi != null) {
-      throw MediaInfoInstanceHasExist();
+      throw MediaInfoInstanceHasExists();
     }
 
     _mi = _miNewQuick(path.toNativeUtf8(), options.toNativeUtf8());
