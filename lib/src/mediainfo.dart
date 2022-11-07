@@ -111,7 +111,11 @@ class Mediainfo {
         .toDartString();
   }
 
-  /// Get all details about a file in one string
+  /// Get all informations about a file in one string.
+  /// This function require load file.
+  /// 
+  /// Throws [NotLoadedMediaInfoInstance] if instance is not loaded 
+  /// Returns [String] all information about file
   String inform() {
     if (_mi == null) {
       throw NotLoadedMediaInfoInstance();
@@ -119,7 +123,10 @@ class Mediainfo {
     return _miInform(_mi!, 0).toDartString();
   }
 
-  ///Get a piece of information about a file (parameter is a string)
+  /// Get a piece of information about a file (parameter is a string)
+  /// 
+  /// Throws [NotLoadedMediaInfoInstance] if instance is not loaded or [FileHasNotLoaded] if file is not loaded.
+  /// Returns [String] with information about parameter
   String getInfo(
     MediaInfoStreamType streamType,
     int streamNumber,
