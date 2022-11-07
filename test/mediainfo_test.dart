@@ -31,6 +31,15 @@ void main() {
     expect(optionResult, "MediaInfoLib - v22.09");
   });
 
+  test('mediainfo file inform', () async {
+    final musicPath = path.join(Directory.current.path, "assets/Beat_Thee.mp3");
+    final mi = Mediainfo(customDebugPath: debugPath);
+    mi.quickLoad(musicPath);
+    final optionResult = mi.inform();
+
+    expect(optionResult.isNotEmpty, true);
+  });
+
   test('Get music data with quick load', () async {
     final musicPath = path.join(Directory.current.path, "assets/Beat_Thee.mp3");
     final mi = Mediainfo(customDebugPath: debugPath);
