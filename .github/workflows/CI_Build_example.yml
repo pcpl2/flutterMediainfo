@@ -7,8 +7,7 @@ on:
     branches: [ main ]
 
 env:
-  flutter_version: "2.8.1"
-
+  flutter_version: "3.3.7"
 
 jobs:
   tests:
@@ -34,24 +33,22 @@ jobs:
           target: macOS
     steps:
       - name: Checkout the code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3.0.2
         
-      - uses: subosito/flutter-action@v1
+      - name: Setup the flutter environment.
+        uses: subosito/flutter-action@v2.4.0
         with:
           flutter-version: ${{ env.flutter_version }}
           channel: 'stable'
+          cache: true
+          cache-key: flutter
+          cache-path: ${{ runner.tool_cache }}/flutter
 
       - name: Enable desktop support ubuntu
         run: | 
           flutter config --enable-linux-desktop
           flutter config --enable-windows-desktop
           flutter config --enable-macos-desktop
-
-      - name: Cache Flutter dependencies
-        uses: actions/cache@v1
-        with:
-          path: ${{ env.PUB_CACHE }}
-          key: ${{ runner.os }}-flutter-dependencies-cache-${{ env.flutter_version }}
 
       - if: matrix.target == 'Linux'
         name: Patch for linux build
@@ -82,7 +79,7 @@ jobs:
           dest: FlutterMediaInfo_Example_${{ matrix.target }}.zip
       
       - name: Upload generated application to the artifacts.
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3.1.0
         with:
           name: FlutterMediaInfo Example ${{ matrix.build_target }}
           path: FlutterMediaInfo_Example_${{ matrix.target }}.zip

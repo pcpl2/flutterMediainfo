@@ -2,6 +2,7 @@
 
 * Fixed copy and load dylib for macos.
 * Fixed example for macos.
+* Updated Flutter to 3.3.7
 
 ## 0.0.1+1
 
