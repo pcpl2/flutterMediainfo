@@ -19,10 +19,22 @@ jobs:
           build_target: windows
           build_path: build\windows\runner\Release
           target: Windows
+        - os: windows-2022
+          build_target: windows
+          build_path: build\windows\runner\Release
+          target: Windows
         - os: ubuntu-20.04
           build_target: linux
           build_path: build/linux/x64/release/bundle
           target: Linux
+        - os: ubuntu-22.04
+          build_target: linux
+          build_path: build/linux/x64/release/bundle
+          target: Linux
+        - os: macos-12
+          build_target: macos
+          build_path: build/macos/Build/Products/Release
+          target: macOS
         - os: macos-11
           build_target: macos
           build_path: build/macos/Build/Products/Release
@@ -33,10 +45,10 @@ jobs:
           target: macOS
     steps:
       - name: Checkout the code
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         
       - name: Setup the flutter environment.
-        uses: subosito/flutter-action@v2.4.0
+        uses: subosito/flutter-action@v2.8.0
         with:
           flutter-version: ${{ env.flutter_version }}
           channel: 'stable'
@@ -79,7 +91,7 @@ jobs:
           dest: FlutterMediaInfo_Example_${{ matrix.target }}.zip
       
       - name: Upload generated application to the artifacts.
-        uses: actions/upload-artifact@v3.1.0
+        uses: actions/upload-artifact@v3.1.1
         with:
           name: FlutterMediaInfo Example ${{ matrix.build_target }}
           path: FlutterMediaInfo_Example_${{ matrix.target }}.zip
