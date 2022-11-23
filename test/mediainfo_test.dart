@@ -64,6 +64,30 @@ void main() {
     mi.delete();
   });
 
+  test('Get music file with unicode symbols on quick load', () async {
+    final musicPath = path.join(Directory.current.path, "assets/テスト音楽.mp3");
+    final mi = Mediainfo(customDebugPath: debugPath);
+    mi.quickLoad(musicPath);
+    expect(
+        mi.getInfo(
+            MediaInfoStreamType.mediaInfoStreamAudio, 0, "BitRate/String"),
+        "320 kb/s");
+    expect(
+        mi.getInfo(
+            MediaInfoStreamType.mediaInfoStreamAudio, 0, "Duration/String2"),
+        "3 min 11 s");
+    expect(
+        mi.getInfo(
+            MediaInfoStreamType.mediaInfoStreamAudio, 0, "SamplingRate/String"),
+        "44.1 kHz");
+    expect(
+        mi.getInfo(
+            MediaInfoStreamType.mediaInfoStreamAudio, 0, "FrameRate/String"),
+        "38.281 FPS (1152 SPF)");
+
+    mi.delete();
+  });
+
   test('Get music data with open', () async {
     final musicPath = path.join(Directory.current.path, "assets/Beat_Thee.mp3");
     final mi = Mediainfo(customDebugPath: debugPath);
