@@ -86,7 +86,7 @@ class Mediainfo {
       throw NotLoadedMediaInfoInstance();
     }
 
-    final res = _miOpen(_mi!, path.toNativeUtf8());
+    final res = _miOpen(_mi!, path.toNativeUtf16());
 
     if (res > 0) {
       fileOpened = true;
@@ -101,20 +101,20 @@ class Mediainfo {
       throw MediaInfoInstanceHasExists();
     }
 
-    _mi = _miNewQuick(path.toNativeUtf8(), options.toNativeUtf8());
+    _mi = _miNewQuick(path.toNativeUtf16(), options.toNativeUtf16());
     fileOpened = true;
   }
 
   String option(String option, {String value = ""}) {
     return _miOption(
-            _mi ?? nullptr, option.toNativeUtf8(), value.toNativeUtf8())
+            _mi ?? nullptr, option.toNativeUtf16(), value.toNativeUtf16())
         .toDartString();
   }
 
   /// Get all informations about a file in one string.
   /// This function require load file.
-  /// 
-  /// Throws [NotLoadedMediaInfoInstance] if instance is not loaded 
+  ///
+  /// Throws [NotLoadedMediaInfoInstance] if instance is not loaded
   /// Returns [String] all information about file
   String inform() {
     if (_mi == null) {
@@ -124,7 +124,7 @@ class Mediainfo {
   }
 
   /// Get a piece of information about a file (parameter is a string)
-  /// 
+  ///
   /// Throws [NotLoadedMediaInfoInstance] if instance is not loaded or [FileHasNotLoaded] if file is not loaded.
   /// Returns [String] with information about parameter
   String getInfo(
@@ -145,7 +145,7 @@ class Mediainfo {
       _mi!,
       streamType.index,
       streamNumber,
-      parameter.toNativeUtf8(),
+      parameter.toNativeUtf16(),
       kindOfInfo.index,
       kindOfSearch.index,
     ).toDartString();
@@ -165,54 +165,52 @@ class Mediainfo {
 
   void _loadSymbols(DynamicLibrary dylib) {
     _miInit =
-        dylib.lookupFunction<MediaInfoANew, MediaInfoInit>("MediaInfoA_New");
+        dylib.lookupFunction<MediaInfoANew, MediaInfoInit>("MediaInfo_New");
     _miNewQuick = dylib.lookupFunction<MediaInfoANewQuick, MediaInfoNewQuick>(
-        "MediaInfoA_New_Quick");
+        "MediaInfo_New_Quick");
     _miDelete = dylib
-        .lookupFunction<MediaInfoADelete, MediaInfoDelete>("MediaInfoA_Delete");
+        .lookupFunction<MediaInfoADelete, MediaInfoDelete>("MediaInfo_Delete");
     _miOpen =
-        dylib.lookupFunction<MediaInfoAOpen, MediaInfoOpen>("MediaInfoA_Open");
+        dylib.lookupFunction<MediaInfoAOpen, MediaInfoOpen>("MediaInfo_Open");
     _miOpenBuffer =
         dylib.lookupFunction<MediaInfoAOpenBuffer, MediaInfoOpenBuffer>(
-            "MediaInfoA_Open_Buffer");
+            "MediaInfo_Open_Buffer");
     _miOpenBufferInit =
         dylib.lookupFunction<MediaInfoAOpenBufferInit, MediaInfoOpenBufferInit>(
-            "MediaInfoA_Open_Buffer_Init");
+            "MediaInfo_Open_Buffer_Init");
     _miOpenBufferContinue = dylib.lookupFunction<MediaInfoAOpenBufferContinue,
-        MediaInfoOpenBufferContinue>("MediaInfoA_Open_Buffer_Continue");
+        MediaInfoOpenBufferContinue>("MediaInfo_Open_Buffer_Continue");
     _miOpenBufferContinueGoToGet = dylib.lookupFunction<
             MediaInfoAOpenBufferContinueGoToGet,
             MediaInfoOpenBufferContinueGoToGet>(
-        "MediaInfoA_Open_Buffer_Continue_GoTo_Get");
+        "MediaInfo_Open_Buffer_Continue_GoTo_Get");
     _miOpenBufferFinalize = dylib.lookupFunction<MediaInfoAOpenBufferFinalize,
-        MediaInfoOpenBufferFinalize>("MediaInfoA_Open_Buffer_Finalize");
+        MediaInfoOpenBufferFinalize>("MediaInfo_Open_Buffer_Finalize");
     _miOpenNextPacket =
         dylib.lookupFunction<MediaInfoAOpenNextPacket, MediaInfoOpenNextPacket>(
-            "MediaInfoA_Open_NextPacket");
+            "MediaInfo_Open_NextPacket");
     _miSave =
-        dylib.lookupFunction<MediaInfoASave, MediaInfoSave>("MediaInfoA_Save");
+        dylib.lookupFunction<MediaInfoASave, MediaInfoSave>("MediaInfo_Save");
     _miClose = dylib
-        .lookupFunction<MediaInfoAClose, MediaInfoClose>("MediaInfoA_Close");
+        .lookupFunction<MediaInfoAClose, MediaInfoClose>("MediaInfo_Close");
     _miInform = dylib
-        .lookupFunction<MediaInfoAInform, MediaInfoInform>("MediaInfoA_Inform");
+        .lookupFunction<MediaInfoAInform, MediaInfoInform>("MediaInfo_Inform");
     _miGetI =
-        dylib.lookupFunction<MediaInfoAGetI, MediaInfoGetI>("MediaInfoA_GetI");
-    _miGet =
-        dylib.lookupFunction<MediaInfoAGet, MediaInfoGet>("MediaInfoA_Get");
+        dylib.lookupFunction<MediaInfoAGetI, MediaInfoGetI>("MediaInfo_GetI");
+    _miGet = dylib.lookupFunction<MediaInfoAGet, MediaInfoGet>("MediaInfo_Get");
     _miSetI =
-        dylib.lookupFunction<MediaInfoASetI, MediaInfoSetI>("MediaInfoA_SetI");
-    _miSet =
-        dylib.lookupFunction<MediaInfoASet, MediaInfoSet>("MediaInfoA_Set");
+        dylib.lookupFunction<MediaInfoASetI, MediaInfoSetI>("MediaInfo_SetI");
+    _miSet = dylib.lookupFunction<MediaInfoASet, MediaInfoSet>("MediaInfo_Set");
     _miOutputBufferGet = dylib.lookupFunction<MediaInfoAOutputBufferGet,
-        MediaInfoOutputBufferGet>("MediaInfoA_Output_Buffer_Get");
+        MediaInfoOutputBufferGet>("MediaInfo_Output_Buffer_Get");
     _miOutputBufferGetI = dylib.lookupFunction<MediaInfoAOutputBufferGetI,
-        MediaInfoOutputBufferGetI>("MediaInfoA_Output_Buffer_GetI");
+        MediaInfoOutputBufferGetI>("MediaInfo_Output_Buffer_GetI");
     _miOption = dylib
-        .lookupFunction<MediaInfoAOption, MediaInfoOption>("MediaInfoA_Option");
+        .lookupFunction<MediaInfoAOption, MediaInfoOption>("MediaInfo_Option");
     _miStateGet = dylib.lookupFunction<MediaInfoAStateGet, MediaInfoStateGet>(
-        "MediaInfoA_State_Get");
+        "MediaInfo_State_Get");
     _miCountGet = dylib.lookupFunction<MediaInfoACountGet, MediaInfoCountGet>(
-        "MediaInfoA_Count_Get");
+        "MediaInfo_Count_Get");
 
     developer.log("${option("Info_Version")} Loaded");
   }

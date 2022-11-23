@@ -2,18 +2,18 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-//void*           __stdcall MediaInfoA_New ()
+//void*           __stdcall MediaInfo_New ()
 typedef MediaInfoANew = Pointer<Void> Function();
 typedef MediaInfoInit = Pointer<Void> Function();
 
-//void*           __stdcall MediaInfoA_New_Quick (const char* File, const char* Options)
+//void*           __stdcall MediaInfoA_New_Quick (const wchar_t* File, const wchar_t* Options)
 typedef MediaInfoANewQuick = Pointer<Void> Function(
-  Pointer<Utf8> file,
-  Pointer<Utf8> options,
+  Pointer<Utf16> file,
+  Pointer<Utf16> options,
 );
 typedef MediaInfoNewQuick = Pointer<Void> Function(
-  Pointer<Utf8> file,
-  Pointer<Utf8> options,
+  Pointer<Utf16> file,
+  Pointer<Utf16> options,
 );
 
 //void            __stdcall MediaInfoA_Delete (void* Handle)
@@ -24,29 +24,29 @@ typedef MediaInfoDelete = void Function(
   Pointer<Void> handle,
 );
 
-//size_t          __stdcall MediaInfoA_Open (void* Handle, const char* File)
+//size_t          __stdcall MediaInfoA_Open (void* Handle, const wchar_t* File)
 typedef MediaInfoAOpen = Uint32 Function(
   Pointer<Void> handle,
-  Pointer<Utf8> file,
+  Pointer<Utf16> file,
 );
 typedef MediaInfoOpen = int Function(
   Pointer<Void> handle,
-  Pointer<Utf8> file,
+  Pointer<Utf16> file,
 );
 
-//size_t          __stdcall MediaInfoA_Open_Buffer (void* Handle, const unsigned char* Begin, size_t  Begin_Size, const unsigned char* End, size_t  End_Size)
+//size_t          __stdcall MediaInfoA_Open_Buffer (void* Handle, const unsigned wchar_t* Begin, size_t  Begin_Size, const unsigned wchar_t* End, size_t  End_Size)
 typedef MediaInfoAOpenBuffer = Uint32 Function(
   Pointer<Void> handle,
-  Pointer<Utf8> begin,
+  Pointer<Utf16> begin,
   Uint32 beginSize,
-  Pointer<Utf8> end,
+  Pointer<Utf16> end,
   Uint32 endSize,
 );
 typedef MediaInfoOpenBuffer = int Function(
   Pointer<Void> handle,
-  Pointer<Utf8> begin,
+  Pointer<Utf16> begin,
   int beginSize,
-  Pointer<Utf8> end,
+  Pointer<Utf16> end,
   int endSize,
 );
 
@@ -114,25 +114,25 @@ typedef MediaInfoClose = void Function(
   Pointer<Void> handle,
 );
 
-//const char*     __stdcall MediaInfoA_Inform (void* Handle, size_t Reserved)
-typedef MediaInfoAInform = Pointer<Utf8> Function(
+//const wchar_t*     __stdcall MediaInfoA_Inform (void* Handle, size_t Reserved)
+typedef MediaInfoAInform = Pointer<Utf16> Function(
   Pointer<Void> handle,
   Uint32 reserved,
 );
-typedef MediaInfoInform = Pointer<Utf8> Function(
+typedef MediaInfoInform = Pointer<Utf16> Function(
   Pointer<Void> handle,
   int reserved,
 );
 
-//const char*     __stdcall MediaInfoA_GetI (void* Handle, MediaInfo_stream_t StreamKind, size_t StreamNumber, size_t  Parameter, MediaInfo_info_C KindOfInfo)
-typedef MediaInfoAGetI = Pointer<Utf8> Function(
+//const wchar_t*     __stdcall MediaInfoA_GetI (void* Handle, MediaInfo_stream_t StreamKind, size_t StreamNumber, size_t  Parameter, MediaInfo_info_C KindOfInfo)
+typedef MediaInfoAGetI = Pointer<Utf16> Function(
   Pointer<Void> handle,
   Uint32 streamKind,
   Uint32 streamNumber,
   Uint32 parameter,
   Uint32 kindOfInfo,
 );
-typedef MediaInfoGetI = Pointer<Utf8> Function(
+typedef MediaInfoGetI = Pointer<Utf16> Function(
   Pointer<Void> handle,
   int streamKind,
   int streamNumber,
@@ -140,68 +140,68 @@ typedef MediaInfoGetI = Pointer<Utf8> Function(
   int kindOfInfo,
 );
 
-//const char*     __stdcall MediaInfoA_Get (void* Handle, MediaInfo_stream_t StreamKind, size_t StreamNumber, const char* Parameter, MediaInfo_info_C KindOfInfo, MediaInfo_info_C KindOfSearch)
-typedef MediaInfoAGet = Pointer<Utf8> Function(
+//const wchar_t*     __stdcall MediaInfoA_Get (void* Handle, MediaInfo_stream_t StreamKind, size_t StreamNumber, const wchar_t* Parameter, MediaInfo_info_C KindOfInfo, MediaInfo_info_C KindOfSearch)
+typedef MediaInfoAGet = Pointer<Utf16> Function(
   Pointer<Void> handle,
   Uint32 streamKind,
   Uint32 streamNumber,
-  Pointer<Utf8> parameter,
+  Pointer<Utf16> parameter,
   Uint32 kindOfInfo,
   Uint32 kindOfSearch,
 );
-typedef MediaInfoGet = Pointer<Utf8> Function(
+typedef MediaInfoGet = Pointer<Utf16> Function(
   Pointer<Void> handle,
   int streamKind,
   int streamNumber,
-  Pointer<Utf8> parameter,
+  Pointer<Utf16> parameter,
   int kindOfInfo,
   int kindOfSearch,
 );
 
-//size_t          __stdcall MediaInfoA_SetI (void* Handle, const char* ToSet, MediaInfo_stream_t StreamKind, size_t StreamNumber, size_t  Parameter, const char* OldParameter)
+//size_t          __stdcall MediaInfoA_SetI (void* Handle, const wchar_t* ToSet, MediaInfo_stream_t StreamKind, size_t StreamNumber, size_t  Parameter, const wchar_t* OldParameter)
 typedef MediaInfoASetI = Uint32 Function(
   Pointer<Void> handle,
-  Pointer<Utf8> toSet,
+  Pointer<Utf16> toSet,
   Uint32 streamKind,
   Uint32 streamNumber,
   Uint32 parameter,
-  Pointer<Utf8> oldParameter,
+  Pointer<Utf16> oldParameter,
 );
 typedef MediaInfoSetI = int Function(
   Pointer<Void> handle,
-  Pointer<Utf8> toSet,
+  Pointer<Utf16> toSet,
   int streamKind,
   int streamNumber,
   int parameter,
-  Pointer<Utf8> oldParameter,
+  Pointer<Utf16> oldParameter,
 );
 
-//size_t          __stdcall MediaInfoA_Set (void* Handle, const char* ToSet, MediaInfo_stream_t StreamKind, size_t StreamNumber, const char* Parameter, const char* OldParameter)
+//size_t          __stdcall MediaInfoA_Set (void* Handle, const wchar_t* ToSet, MediaInfo_stream_t StreamKind, size_t StreamNumber, const wchar_t* Parameter, const wchar_t* OldParameter)
 typedef MediaInfoASet = Uint32 Function(
   Pointer<Void> handle,
-  Pointer<Utf8> toSet,
+  Pointer<Utf16> toSet,
   Uint32 streamKind,
   Uint32 streamNumber,
-  Pointer<Utf8> parameter,
-  Pointer<Utf8> oldParameter,
+  Pointer<Utf16> parameter,
+  Pointer<Utf16> oldParameter,
 );
 typedef MediaInfoSet = int Function(
   Pointer<Void> handle,
-  Pointer<Utf8> toSet,
+  Pointer<Utf16> toSet,
   int streamKind,
   int streamNumber,
-  Pointer<Utf8> parameter,
-  Pointer<Utf8> oldParameter,
+  Pointer<Utf16> parameter,
+  Pointer<Utf16> oldParameter,
 );
 
-//size_t          __stdcall MediaInfoA_Output_Buffer_Get (void* Handle, const char* Value)
+//size_t          __stdcall MediaInfoA_Output_Buffer_Get (void* Handle, const wchar_t* Value)
 typedef MediaInfoAOutputBufferGet = Uint32 Function(
   Pointer<Void> handle,
-  Pointer<Utf8> value,
+  Pointer<Utf16> value,
 );
 typedef MediaInfoOutputBufferGet = int Function(
   Pointer<Void> handle,
-  Pointer<Utf8> value,
+  Pointer<Utf16> value,
 );
 
 //size_t          __stdcall MediaInfoA_Output_Buffer_GetI (void* Handle, size_t Pos)
@@ -214,16 +214,16 @@ typedef MediaInfoOutputBufferGetI = int Function(
   int int,
 );
 
-//const char*     __stdcall MediaInfoA_Option (void* Handle, const char* Option, const char* Value)
-typedef MediaInfoAOption = Pointer<Utf8> Function(
+//const wchar_t*     __stdcall MediaInfoA_Option (void* Handle, const wchar_t* Option, const wchar_t* Value)
+typedef MediaInfoAOption = Pointer<Utf16> Function(
   Pointer<Void> handle,
-  Pointer<Utf8> option,
-  Pointer<Utf8> value,
+  Pointer<Utf16> option,
+  Pointer<Utf16> value,
 );
-typedef MediaInfoOption = Pointer<Utf8> Function(
+typedef MediaInfoOption = Pointer<Utf16> Function(
   Pointer<Void> handle,
-  Pointer<Utf8> option,
-  Pointer<Utf8> value,
+  Pointer<Utf16> option,
+  Pointer<Utf16> value,
 );
 
 //size_t          __stdcall MediaInfoA_State_Get(void* Handle)
