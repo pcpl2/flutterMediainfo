@@ -17,28 +17,28 @@ class Mediainfo {
   bool fileOpened = false;
 
   //Functions
-  late MediaInfoInit _miInit;
-  late MediaInfoNewQuick _miNewQuick;
-  late MediaInfoDelete _miDelete;
-  late MediaInfoOpen _miOpen;
-  late MediaInfoOpenBuffer _miOpenBuffer;
-  late MediaInfoOpenBufferInit _miOpenBufferInit;
-  late MediaInfoOpenBufferContinue _miOpenBufferContinue;
-  late MediaInfoOpenBufferContinueGoToGet _miOpenBufferContinueGoToGet;
-  late MediaInfoOpenBufferFinalize _miOpenBufferFinalize;
-  late MediaInfoOpenNextPacket _miOpenNextPacket;
-  late MediaInfoSave _miSave;
-  late MediaInfoClose _miClose;
-  late MediaInfoInform _miInform;
-  late MediaInfoGetI _miGetI;
-  late MediaInfoGet _miGet;
-  late MediaInfoSetI _miSetI;
-  late MediaInfoSet _miSet;
-  late MediaInfoOutputBufferGet _miOutputBufferGet;
-  late MediaInfoOutputBufferGetI _miOutputBufferGetI;
-  late MediaInfoOption _miOption;
-  late MediaInfoStateGet _miStateGet;
-  late MediaInfoCountGet _miCountGet;
+  late MediaInfoInitFT _miInit;
+  late MediaInfoNewQuickFT _miNewQuick;
+  late MediaInfoDeleteFT _miDelete;
+  late MediaInfoOpenFT _miOpen;
+  late MediaInfoOpenBufferFT _miOpenBuffer;
+  late MediaInfoOpenBufferInitFT _miOpenBufferInit;
+  late MediaInfoOpenBufferContinueFT _miOpenBufferContinue;
+  late MediaInfoOpenBufferContinueGoToGetFT _miOpenBufferContinueGoToGet;
+  late MediaInfoOpenBufferFinalizeFT _miOpenBufferFinalize;
+  late MediaInfoOpenNextPacketFT _miOpenNextPacket;
+  late MediaInfoSaveFT _miSave;
+  late MediaInfoCloseFT _miClose;
+  late MediaInfoInformFT _miInform;
+  late MediaInfoGetIFT _miGetI;
+  late MediaInfoGetFT _miGet;
+  late MediaInfoSetIFT _miSetI;
+  late MediaInfoSetFT _miSet;
+  late MediaInfoOutputBufferGetFT _miOutputBufferGet;
+  late MediaInfoOutputBufferGetIFT _miOutputBufferGetI;
+  late MediaInfoOptionFT _miOption;
+  late MediaInfoStateGetFT _miStateGet;
+  late MediaInfoCountGetFT _miCountGet;
 
   @Deprecated("Use Mediainfo()")
   Mediainfo.init({String? customDebugPath}) {
@@ -165,51 +165,51 @@ class Mediainfo {
 
   void _loadSymbols(DynamicLibrary dylib) {
     _miInit =
-        dylib.lookupFunction<MediaInfoANew, MediaInfoInit>("MediaInfo_New");
-    _miNewQuick = dylib.lookupFunction<MediaInfoANewQuick, MediaInfoNewQuick>(
+        dylib.lookupFunction<MediaInfoNew, MediaInfoInitFT>("MediaInfo_New");
+    _miNewQuick = dylib.lookupFunction<MediaInfoNewQuick, MediaInfoNewQuickFT>(
         "MediaInfo_New_Quick");
     _miDelete = dylib
-        .lookupFunction<MediaInfoADelete, MediaInfoDelete>("MediaInfo_Delete");
+        .lookupFunction<MediaInfoDelete, MediaInfoDeleteFT>("MediaInfo_Delete");
     _miOpen =
-        dylib.lookupFunction<MediaInfoAOpen, MediaInfoOpen>("MediaInfo_Open");
+        dylib.lookupFunction<MediaInfoOpen, MediaInfoOpenFT>("MediaInfo_Open");
     _miOpenBuffer =
-        dylib.lookupFunction<MediaInfoAOpenBuffer, MediaInfoOpenBuffer>(
+        dylib.lookupFunction<MediaInfoOpenBuffer, MediaInfoOpenBufferFT>(
             "MediaInfo_Open_Buffer");
-    _miOpenBufferInit =
-        dylib.lookupFunction<MediaInfoAOpenBufferInit, MediaInfoOpenBufferInit>(
-            "MediaInfo_Open_Buffer_Init");
-    _miOpenBufferContinue = dylib.lookupFunction<MediaInfoAOpenBufferContinue,
-        MediaInfoOpenBufferContinue>("MediaInfo_Open_Buffer_Continue");
+    _miOpenBufferInit = dylib.lookupFunction<MediaInfoOpenBufferInit,
+        MediaInfoOpenBufferInitFT>("MediaInfo_Open_Buffer_Init");
+    _miOpenBufferContinue = dylib.lookupFunction<MediaInfoOpenBufferContinue,
+        MediaInfoOpenBufferContinueFT>("MediaInfo_Open_Buffer_Continue");
     _miOpenBufferContinueGoToGet = dylib.lookupFunction<
-            MediaInfoAOpenBufferContinueGoToGet,
-            MediaInfoOpenBufferContinueGoToGet>(
+            MediaInfoOpenBufferContinueGoToGet,
+            MediaInfoOpenBufferContinueGoToGetFT>(
         "MediaInfo_Open_Buffer_Continue_GoTo_Get");
-    _miOpenBufferFinalize = dylib.lookupFunction<MediaInfoAOpenBufferFinalize,
-        MediaInfoOpenBufferFinalize>("MediaInfo_Open_Buffer_Finalize");
-    _miOpenNextPacket =
-        dylib.lookupFunction<MediaInfoAOpenNextPacket, MediaInfoOpenNextPacket>(
-            "MediaInfo_Open_NextPacket");
+    _miOpenBufferFinalize = dylib.lookupFunction<MediaInfoOpenBufferFinalize,
+        MediaInfoOpenBufferFinalizeFT>("MediaInfo_Open_Buffer_Finalize");
+    _miOpenNextPacket = dylib.lookupFunction<MediaInfoOpenNextPacket,
+        MediaInfoOpenNextPacketFT>("MediaInfo_Open_NextPacket");
     _miSave =
-        dylib.lookupFunction<MediaInfoASave, MediaInfoSave>("MediaInfo_Save");
+        dylib.lookupFunction<MediaInfoSave, MediaInfoSaveFT>("MediaInfo_Save");
     _miClose = dylib
-        .lookupFunction<MediaInfoAClose, MediaInfoClose>("MediaInfo_Close");
+        .lookupFunction<MediaInfoClose, MediaInfoCloseFT>("MediaInfo_Close");
     _miInform = dylib
-        .lookupFunction<MediaInfoAInform, MediaInfoInform>("MediaInfo_Inform");
+        .lookupFunction<MediaInfoInform, MediaInfoInformFT>("MediaInfo_Inform");
     _miGetI =
-        dylib.lookupFunction<MediaInfoAGetI, MediaInfoGetI>("MediaInfo_GetI");
-    _miGet = dylib.lookupFunction<MediaInfoAGet, MediaInfoGet>("MediaInfo_Get");
+        dylib.lookupFunction<MediaInfoGetI, MediaInfoGetIFT>("MediaInfo_GetI");
+    _miGet =
+        dylib.lookupFunction<MediaInfoGet, MediaInfoGetFT>("MediaInfo_Get");
     _miSetI =
-        dylib.lookupFunction<MediaInfoASetI, MediaInfoSetI>("MediaInfo_SetI");
-    _miSet = dylib.lookupFunction<MediaInfoASet, MediaInfoSet>("MediaInfo_Set");
-    _miOutputBufferGet = dylib.lookupFunction<MediaInfoAOutputBufferGet,
-        MediaInfoOutputBufferGet>("MediaInfo_Output_Buffer_Get");
-    _miOutputBufferGetI = dylib.lookupFunction<MediaInfoAOutputBufferGetI,
-        MediaInfoOutputBufferGetI>("MediaInfo_Output_Buffer_GetI");
+        dylib.lookupFunction<MediaInfoSetI, MediaInfoSetIFT>("MediaInfo_SetI");
+    _miSet =
+        dylib.lookupFunction<MediaInfoSet, MediaInfoSetFT>("MediaInfo_Set");
+    _miOutputBufferGet = dylib.lookupFunction<MediaInfoOutputBufferGet,
+        MediaInfoOutputBufferGetFT>("MediaInfo_Output_Buffer_Get");
+    _miOutputBufferGetI = dylib.lookupFunction<MediaInfoOutputBufferGetI,
+        MediaInfoOutputBufferGetIFT>("MediaInfo_Output_Buffer_GetI");
     _miOption = dylib
-        .lookupFunction<MediaInfoAOption, MediaInfoOption>("MediaInfo_Option");
-    _miStateGet = dylib.lookupFunction<MediaInfoAStateGet, MediaInfoStateGet>(
+        .lookupFunction<MediaInfoOption, MediaInfoOptionFT>("MediaInfo_Option");
+    _miStateGet = dylib.lookupFunction<MediaInfoStateGet, MediaInfoStateGetFT>(
         "MediaInfo_State_Get");
-    _miCountGet = dylib.lookupFunction<MediaInfoACountGet, MediaInfoCountGet>(
+    _miCountGet = dylib.lookupFunction<MediaInfoCountGet, MediaInfoCountGetFT>(
         "MediaInfo_Count_Get");
 
     developer.log("${option("Info_Version")} Loaded");
