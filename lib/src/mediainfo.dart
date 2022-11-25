@@ -5,7 +5,7 @@ import 'dart:developer' as developer;
 import "dart:ffi";
 import 'dart:io';
 
-import "package:ffi/ffi.dart";
+import 'package:flutter_media_info/src/extensions.dart';
 import 'models/media_info_exceptions.dart';
 import 'models/media_info_info_type.dart';
 import 'models/media_info_stream_type.dart';
@@ -86,7 +86,7 @@ class Mediainfo {
       throw NotLoadedMediaInfoInstance();
     }
 
-    final res = _miOpen(_mi!, path.toNativeUtf16());
+    final res = _miOpen(_mi!, path.toNativeWchar());
 
     if (res > 0) {
       fileOpened = true;
@@ -96,18 +96,22 @@ class Mediainfo {
     }
   }
 
+  /// Quick load file
+  /// This function has load file
+  ///
+  /// Throws [MediaInfoInstanceHasExists] if instance is loaded
   void quickLoad(String path, {String options = ""}) {
     if (_mi != null) {
       throw MediaInfoInstanceHasExists();
     }
 
-    _mi = _miNewQuick(path.toNativeUtf16(), options.toNativeUtf16());
+    _mi = _miNewQuick(path.toNativeWchar(), options.toNativeWchar());
     fileOpened = true;
   }
 
   String option(String option, {String value = ""}) {
     return _miOption(
-            _mi ?? nullptr, option.toNativeUtf16(), value.toNativeUtf16())
+            _mi ?? nullptr, option.toNativeWchar(), value.toNativeWchar())
         .toDartString();
   }
 
@@ -145,7 +149,7 @@ class Mediainfo {
       _mi!,
       streamType.index,
       streamNumber,
-      parameter.toNativeUtf16(),
+      parameter.toNativeWchar(),
       kindOfInfo.index,
       kindOfSearch.index,
     ).toDartString();
