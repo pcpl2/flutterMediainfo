@@ -25,6 +25,7 @@ flutter:
     platforms:
       linux:
         pluginClass: FlutterMediaInfoPlugin
+        ffiPlugin: true
       macos:
         pluginClass: FlutterMediaInfoPlugin
       windows:

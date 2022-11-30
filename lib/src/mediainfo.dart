@@ -5,6 +5,7 @@ import 'dart:developer' as developer;
 import "dart:ffi";
 import 'dart:io';
 
+import 'package:ffi/ffi.dart';
 import 'package:flutter_media_info/src/extensions.dart';
 import 'models/media_info_exceptions.dart';
 import 'models/media_info_info_type.dart';
@@ -15,6 +16,8 @@ import 'utils.dart';
 class Mediainfo {
   Pointer<Void>? _mi;
   bool fileOpened = false;
+
+  late DynamicLibrary _dylib;
 
   //Functions
   late MediaInfoInitFT _miInit;
@@ -40,6 +43,8 @@ class Mediainfo {
   late MediaInfoStateGetFT _miStateGet;
   late MediaInfoCountGetFT _miCountGet;
 
+  late OpenFileForMediaInfo _openFileForMI;
+
   @Deprecated("Use Mediainfo()")
   Mediainfo.init({String? customDebugPath}) {
     try {
@@ -47,9 +52,9 @@ class Mediainfo {
         DynamicLibrary.open(getLibZen(customDebugPath: customDebugPath));
       }
 
-      final dylib =
+      _dylib =
           DynamicLibrary.open(platformDLPath(customDebugPath: customDebugPath));
-      _loadSymbols(dylib);
+      _loadSymbols(_dylib);
     } on Exception catch (e) {
       developer.log(e.toString());
     }
@@ -61,9 +66,9 @@ class Mediainfo {
         DynamicLibrary.open(getLibZen(customDebugPath: customDebugPath));
       }
 
-      final dylib =
+      _dylib =
           DynamicLibrary.open(platformDLPath(customDebugPath: customDebugPath));
-      _loadSymbols(dylib);
+      _loadSymbols(_dylib);
     } on Exception catch (e) {
       developer.log(e.toString());
     }
@@ -105,7 +110,15 @@ class Mediainfo {
       throw MediaInfoInstanceHasExists();
     }
 
-    _mi = _miNewQuick(path.toNativeWchar(), options.toNativeWchar());
+    if (Platform.isMacOS || Platform.isLinux) {
+      _miOption(nullptr, "QuickInit".toNativeWchar(), options.toNativeWchar());
+      _mi = _miInit();
+
+      _openFileForMI(_dylib.handle, _mi!, path.toNativeUtf8());
+    } else {
+      _mi = _miNewQuick(path.toNativeWchar(), options.toNativeWchar());
+    }
+
     fileOpened = true;
   }
 
@@ -168,6 +181,15 @@ class Mediainfo {
   }
 
   void _loadSymbols(DynamicLibrary dylib) {
+    if (Platform.isMacOS || Platform.isLinux) {
+      final DynamicLibrary nativeAddLib = DynamicLibrary.process();
+      _openFileForMI = nativeAddLib
+          .lookup<
+              NativeFunction<
+                  Int32 Function(Pointer<Void>, Pointer<Void>,
+                      Pointer<Utf8>)>>("openFileForMediaInfo")
+          .asFunction();
+    }
     _miInit =
         dylib.lookupFunction<MediaInfoNew, MediaInfoInitFT>("MediaInfo_New");
     _miNewQuick = dylib.lookupFunction<MediaInfoNewQuick, MediaInfoNewQuickFT>(
