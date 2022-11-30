@@ -1,5 +1,7 @@
 import 'dart:ffi';
 
+import 'package:ffi/ffi.dart';
+
 //void*           __stdcall MediaInfo_New ()
 typedef MediaInfoNew = Pointer<Void> Function();
 typedef MediaInfoInitFT = Pointer<Void> Function();
@@ -242,4 +244,11 @@ typedef MediaInfoCountGetFT = int Function(
   Pointer<Void> handle,
   int streamKind,
   int streamNumber,
+);
+
+
+typedef OpenFileForMediaInfo = int Function(
+  Pointer<Void> myDlib,
+  Pointer<Void> handle,
+  Pointer<Utf8> path,
 );

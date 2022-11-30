@@ -7,7 +7,8 @@ project(${PROJECT_NAME} LANGUAGES CXX)
 set(PLUGIN_NAME "flutter_media_info_plugin")
 
 add_library(${PLUGIN_NAME} SHARED
-  "flutter_media_info_plugin.cc"
+  "flutter_media_info_plugin.cc",
+  "src/FileOpen.cpp"
 )
 apply_standard_settings(${PLUGIN_NAME})
 set_target_properties(${PLUGIN_NAME} PROPERTIES
