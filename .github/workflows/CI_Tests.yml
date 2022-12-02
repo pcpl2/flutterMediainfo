@@ -46,6 +46,7 @@ jobs:
           mkdir cmake
           cd cmake
           cmake ..
+          make install
 
       - name: Analyze
         run: flutter analyze

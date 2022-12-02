@@ -83,6 +83,7 @@ jobs:
           mkdir cmake
           cd cmake
           cmake ..
+          make install
 
       - name: Run tests
         run: flutter test --coverage
