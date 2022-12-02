@@ -1,6 +1,4 @@
 cmake_minimum_required(VERSION 3.10)
-set( CMAKE_CXX_COMPILER "/usr/bin/clang++" )
-set( CMAKE_MAKE_PROGRAM "/usr/bin/ninja" )
 
 set(PROJECT_NAME "native_utils")
 project(${PROJECT_NAME} LANGUAGES CXX)
