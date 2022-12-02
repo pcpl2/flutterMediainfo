@@ -7,7 +7,6 @@ extern "C" __attribute__((visibility("default"))) __attribute__((used))
 int32_t
 openFileForMediaInfo(char *myDlibPath, void *miInstance, char *path)
 {
-
     //fprintf(stderr, "miDylib %p | miInstance %p\n", myDlibPath, miInstance);
     if (myDlibPath == nullptr || miInstance == nullptr)
     {
