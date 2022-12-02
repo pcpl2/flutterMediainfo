@@ -1,25 +1,56 @@
 #include <iostream>
 #include <dlfcn.h>
 #include <stdint.h>
+#include <cstdio>
 
 extern "C" __attribute__((visibility("default"))) __attribute__((used))
 int32_t
-openFileForMediaInfo(void *miDylib, void *miInstance, char *path)
+openFileForMediaInfo(char *myDlibPath, void *miInstance, char *path)
 {
+
+    //fprintf(stderr, "miDylib %p | miInstance %p\n", myDlibPath, miInstance);
+    if (myDlibPath == nullptr || miInstance == nullptr)
+    {
+        return 1;
+    }
+
     typedef unsigned long long MediaInfo_int64u;
     typedef unsigned char MediaInfo_int8u;
 
+    void *hndl = dlopen(myDlibPath, RTLD_NOW);
+
+    if (hndl == NULL) {
+        fprintf(stderr, "dlsym %s\n", dlerror());
+        return 1;
+    }
+
     size_t (*MediaInfo_Open_Buffer_Init)(void *, MediaInfo_int64u, MediaInfo_int64u);
-    MediaInfo_Open_Buffer_Init = (size_t(*)(void *, MediaInfo_int64u, MediaInfo_int64u))dlsym(miDylib, "MediaInfo_Open_Buffer_Init");
+    MediaInfo_Open_Buffer_Init = (size_t(*)(void *, MediaInfo_int64u, MediaInfo_int64u))dlsym(hndl, "MediaInfo_Open_Buffer_Init");
+    if (MediaInfo_Open_Buffer_Init == NULL) {
+        fprintf(stderr, "dlsym %s\n", dlerror());
+        return 1;
+    }
 
     size_t (*MediaInfo_Open_Buffer_Continue)(void *, MediaInfo_int8u *, size_t);
-    MediaInfo_Open_Buffer_Continue = (size_t(*)(void *, MediaInfo_int8u *, size_t))dlsym(miDylib, "MediaInfo_Open_Buffer_Continue");
+    MediaInfo_Open_Buffer_Continue = (size_t(*)(void *, MediaInfo_int8u *, size_t))dlsym(hndl, "MediaInfo_Open_Buffer_Continue");
+    if (MediaInfo_Open_Buffer_Continue == NULL) {
+        fprintf(stderr, "dlsym %s\n", dlerror());
+        return 1;
+    }
 
     MediaInfo_int64u (*MediaInfo_Open_Buffer_Continue_GoTo_Get)(void *);
-    MediaInfo_Open_Buffer_Continue_GoTo_Get = (MediaInfo_int64u(*)(void *))dlsym(miDylib, "MediaInfo_Open_Buffer_Continue_GoTo_Get");
+    MediaInfo_Open_Buffer_Continue_GoTo_Get = (MediaInfo_int64u(*)(void *))dlsym(hndl, "MediaInfo_Open_Buffer_Continue_GoTo_Get");
+    if (MediaInfo_Open_Buffer_Continue_GoTo_Get == NULL) {
+        fprintf(stderr, "dlsym %s\n", dlerror());
+        return 1;
+    }
 
     size_t (*MediaInfo_Open_Buffer_Finalize)(void *);
-    MediaInfo_Open_Buffer_Finalize = (size_t(*)(void *))dlsym(miDylib, "MediaInfo_Open_Buffer_Finalize");
+    MediaInfo_Open_Buffer_Finalize = (size_t(*)(void *))dlsym(hndl, "MediaInfo_Open_Buffer_Finalize");
+    if (MediaInfo_Open_Buffer_Finalize == NULL) {
+        fprintf(stderr, "dlsym %s\n", dlerror());
+        return 1;
+    }
 
     FILE *F = fopen(path, "rb");
     if (F == 0)
@@ -53,6 +84,8 @@ openFileForMediaInfo(void *miDylib, void *miInstance, char *path)
             MediaInfo_Open_Buffer_Init(miInstance, F_Size, ftell(F));                      // Informing MediaInfo we have seek
         }
     } while (From_Buffer_Size > 0);
+
+    delete[] From_Buffer;
 
     // Finalizing
     MediaInfo_Open_Buffer_Finalize(miInstance); // This is the end of the stream, MediaInfo must finnish some work

@@ -17,6 +17,7 @@ class Mediainfo {
   Pointer<Void>? _mi;
   bool fileOpened = false;
 
+  late String _dllPath;
   late DynamicLibrary _dylib;
 
   //Functions
@@ -52,9 +53,10 @@ class Mediainfo {
         DynamicLibrary.open(getLibZen(customDebugPath: customDebugPath));
       }
 
+      _dllPath = platformDLPath(customDebugPath: customDebugPath);
       _dylib =
-          DynamicLibrary.open(platformDLPath(customDebugPath: customDebugPath));
-      _loadSymbols(_dylib);
+          DynamicLibrary.open(_dllPath);
+      _loadSymbols(_dylib, customDebugPath: customDebugPath);
     } on Exception catch (e) {
       developer.log(e.toString());
     }
@@ -66,9 +68,10 @@ class Mediainfo {
         DynamicLibrary.open(getLibZen(customDebugPath: customDebugPath));
       }
 
+      _dllPath = platformDLPath(customDebugPath: customDebugPath);
       _dylib =
-          DynamicLibrary.open(platformDLPath(customDebugPath: customDebugPath));
-      _loadSymbols(_dylib);
+          DynamicLibrary.open(_dllPath);
+      _loadSymbols(_dylib, customDebugPath: customDebugPath);
     } on Exception catch (e) {
       developer.log(e.toString());
     }
@@ -91,7 +94,16 @@ class Mediainfo {
       throw NotLoadedMediaInfoInstance();
     }
 
-    final res = _miOpen(_mi!, path.toNativeWchar());
+    var res = 0;
+
+    if (Platform.isMacOS || Platform.isLinux) {
+      final success = _openFileForMI(_dllPath.toNativeUtf8(), _mi!, path.toNativeUtf8());
+      if(success == 0) {
+        res = 2; //TODO Add valid file size
+      }
+    } else {
+      res = _miOpen(_mi!, path.toNativeWchar());
+    }
 
     if (res > 0) {
       fileOpened = true;
@@ -114,7 +126,7 @@ class Mediainfo {
       _miOption(nullptr, "QuickInit".toNativeWchar(), options.toNativeWchar());
       _mi = _miInit();
 
-      _openFileForMI(_dylib.handle, _mi!, path.toNativeUtf8());
+      _openFileForMI(_dllPath.toNativeUtf8(), _mi!, path.toNativeUtf8());
     } else {
       _mi = _miNewQuick(path.toNativeWchar(), options.toNativeWchar());
     }
@@ -180,13 +192,14 @@ class Mediainfo {
     fileOpened = false;
   }
 
-  void _loadSymbols(DynamicLibrary dylib) {
+  void _loadSymbols(DynamicLibrary dylib, {String? customDebugPath}) {
     if (Platform.isMacOS || Platform.isLinux) {
-      final DynamicLibrary nativeAddLib = DynamicLibrary.process();
+      final DynamicLibrary nativeAddLib = _dylib =
+          DynamicLibrary.open(getNativeUtilsLib(customDebugPath: customDebugPath));
       _openFileForMI = nativeAddLib
           .lookup<
               NativeFunction<
-                  Int32 Function(Pointer<Void>, Pointer<Void>,
+                  Int32 Function(Pointer<Utf8>, Pointer<Void>,
                       Pointer<Utf8>)>>("openFileForMediaInfo")
           .asFunction();
     }

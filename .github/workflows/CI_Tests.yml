@@ -39,6 +39,14 @@ jobs:
       - name: Restore packages
         run: flutter pub get
 
+      - if: runner.os == 'macOS' || runner.os == 'Linux'
+        name: Build native utils
+        run: |
+          cd nativeUtils
+          mkdir cmake
+          cd cmake
+          cmake ..
+
       - name: Analyze
         run: flutter analyze
 

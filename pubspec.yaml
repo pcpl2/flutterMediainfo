@@ -28,5 +28,6 @@ flutter:
         ffiPlugin: true
       macos:
         pluginClass: FlutterMediaInfoPlugin
+        ffiPlugin: true
       windows:
         pluginClass: FlutterMediaInfoPlugin

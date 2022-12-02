@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
                        DESC
   s.homepage         = 'https://github.com/pcpl2/flutterMediainfo'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Patryk "pcpl2" Ławicki' => 'pubdev@pcpl2.ovh' }
+  s.author           = { 'Patryk "pcpl2" Ławicki' => 'pubdev@pcpl2lab.ovh' }
   s.source           = { :path => '.' }
   s.source_files     = 'Classes/**/*'
   s.dependency 'FlutterMacOS'
@@ -21,6 +21,6 @@ Pod::Spec.new do |s|
     'DEFINES_MODULE' => 'YES',
   }
   s.swift_version = '5.0'
-  s.resources = ['libs/libmediainfo.dylib']
+  s.resources = ['libs/libmediainfo.dylib', '../nativeUtils/libs/libnative_utils.dylib']
   s.xcconfig = { 'LD_RUNPATH_SEARCH_PATHS' => '@loader_path/../Frameworks/flutter_media_info.framework/Resources' }
 end

@@ -51,3 +51,21 @@ String getLibZen({String? customDebugPath}) {
   }
   throw Exception("Platform Not Supported: ${Platform.operatingSystem}");
 }
+
+
+String getNativeUtilsLib({String? customDebugPath}) {
+  if (Platform.isMacOS) {
+    if (customDebugPath != null) {
+      return path.join(Directory.current.path, "nativeUtils/libs/libnative_utils.dylib");
+    } else {
+      return path.join(Directory.current.path, "libnative_utils.dylib");
+    }
+  } else if (Platform.isLinux) {
+    if (customDebugPath != null) {
+      return path.join(Directory.current.path, "nativeUtils/libs/libnative_utils.so");
+    } else {
+      return path.join(Directory.current.path, "libnative_utils.so");
+    }
+  }
+  throw Exception("Platform Not Supported: ${Platform.operatingSystem}");
+}
