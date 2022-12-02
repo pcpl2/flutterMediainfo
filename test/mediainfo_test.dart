@@ -7,17 +7,17 @@ import "package:path/path.dart" as path;
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-
+  
   late String debugPath;
 
   if (Platform.isLinux) {
-    debugPath = "linux/libs/";
+    debugPath = "linux/libs";
   }
   if (Platform.isMacOS) {
-    debugPath = "macos/libs/";
+    debugPath = "macos/libs";
   }
   if (Platform.isWindows) {
-    debugPath = "windows/libs/";
+    debugPath = "windows/libs";
   }
 
   test('load mediainfo', () async {
