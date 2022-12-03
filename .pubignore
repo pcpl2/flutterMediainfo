@@ -1,7 +1,7 @@
 assets/*
 .DS_Store
 .dart_tool/
-
+example/*
 .packages
 .pub/
 
