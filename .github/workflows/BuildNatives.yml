@@ -1,0 +1,32 @@
+name: 🏗 Build native utils
+
+on: 
+  workflow_call:
+
+jobs:
+  build_native_utils:
+    name: 🏗 Build native utils
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+        - os: ubuntu-20.04
+        - os: macos-11
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v3.1.0
+
+      - name: Build native utils
+        run: |
+          cd nativeUtils
+          mkdir cmake
+          cd cmake
+          cmake ..
+          make install
+
+      - uses: actions/upload-artifact@v3.1.1
+        with:
+          name: natives.zip
+          path: ./nativeUtils/libs
+          retention-days: 1

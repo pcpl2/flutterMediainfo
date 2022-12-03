@@ -16,30 +16,37 @@ jobs:
       matrix:
         include:
         - os: windows-2019
+          name: Windows 2019
           build_target: windows
           build_path: build\windows\runner\Release
           target: Windows
         - os: windows-2022
+          name: Windows 2022
           build_target: windows
           build_path: build\windows\runner\Release
           target: Windows
         - os: ubuntu-20.04
+          name: Ubuntu 20.04
           build_target: linux
           build_path: build/linux/x64/release/bundle
           target: Linux
         - os: ubuntu-22.04
+          name: Ubuntu 22.04
           build_target: linux
           build_path: build/linux/x64/release/bundle
           target: Linux
         - os: macos-12
+          name: macOS 12
           build_target: macos
           build_path: build/macos/Build/Products/Release
           target: macOS
         - os: macos-11
+          name: macOS 11
           build_target: macos
           build_path: build/macos/Build/Products/Release
           target: macOS
         - os: macos-10.15
+          name: macOS 10.15
           build_target: macos
           build_path: build/macos/Build/Products/Release
           target: macOS
@@ -92,16 +99,10 @@ jobs:
         run: | 
           cd example
           flutter build -v ${{ matrix.build_target }} --release
-
-      - name: Make zip file
-        uses: vimtor/action-zip@v1
-        with:
-          files: example/${{ matrix.build_path }}
-          dest: FlutterMediaInfo_Example_${{ matrix.target }}.zip
       
       - name: Upload generated application to the artifacts.
         uses: actions/upload-artifact@v3.1.1
         with:
           name: FlutterMediaInfo Example ${{ matrix.build_target }}
-          path: FlutterMediaInfo_Example_${{ matrix.target }}.zip
+          path: example/${{ matrix.build_path }}
           retention-days: 5
