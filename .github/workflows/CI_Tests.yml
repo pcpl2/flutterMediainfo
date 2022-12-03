@@ -33,7 +33,7 @@ jobs:
           flutter-version: ${{ env.flutter_version }}
           channel: 'stable'
           cache: true
-          cache-key: flutter
+          cache-key: flutter-${{ matrix.os }} 
           cache-path: ${{ runner.tool_cache }}/flutter
 
       - name: Restore packages
