@@ -38,17 +38,17 @@ jobs:
         - os: macos-12
           name: macOS 12
           build_target: macos
-          build_path: build/macos/Build/Products/Release
+          build_path: build/macos/Build/Products/Release/mediainfo_example.app
           target: macOS
         - os: macos-11
           name: macOS 11
           build_target: macos
-          build_path: build/macos/Build/Products/Release
+          build_path: build/macos/Build/Products/Release/mediainfo_example.app
           target: macOS
         - os: macos-10.15
           name: macOS 10.15
           build_target: macos
-          build_path: build/macos/Build/Products/Release
+          build_path: build/macos/Build/Products/Release/mediainfo_example.app
           target: macOS
     steps:
       - name: Checkout the code
@@ -103,6 +103,6 @@ jobs:
       - name: Upload generated application to the artifacts.
         uses: actions/upload-artifact@v3.1.1
         with:
-          name: FlutterMediaInfo Example ${{ matrix.build_target }}
+          name: FlutterMediaInfo Example ${{ matrix.name }}
           path: example/${{ matrix.build_path }}
           retention-days: 5
