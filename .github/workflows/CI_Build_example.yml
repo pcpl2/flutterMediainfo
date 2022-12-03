@@ -45,11 +45,6 @@ jobs:
           build_target: macos
           build_path: build/macos/Build/Products/Release/mediainfo_example.app
           target: macOS
-        - os: macos-10.15
-          name: macOS 10.15
-          build_target: macos
-          build_path: build/macos/Build/Products/Release/mediainfo_example.app
-          target: macOS
     steps:
       - name: Checkout the code
         uses: actions/checkout@v3.1.0
