@@ -1,0 +1,97 @@
+name: Make release new version.
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Api version (format: Major.Minor.HotFix, example: 1.2.12)'
+        required: true
+
+jobs:
+  build_native_utils:
+    uses: pcpl2/flutterMediainfo/.github/workflows/BuildNatives.yml@main
+
+  build_examples:
+    uses: pcpl2/flutterMediainfo/.github/workflows/CI_Build_example.yml@main
+
+  build:
+    runs-on: ubuntu-latest
+    needs: build_native_utils
+    container:
+      image:  google/dart:latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3.1.0
+
+    - name: Make directory for natives
+      run: mkdir -p nativeUtils/libs
+
+    - name: Get natives files
+      uses: actions/download-artifact@v3.0.1
+      with:
+        name: natives.zip
+        path: ./nativeUtils/libs
+
+    - name: Setup credentials
+      run: | 
+        mkdir -p ~/.pub-cache 
+        cat <<EOF > ~/.pub-cache/credentials.json
+        {
+          "accessToken": "${{ secrets.PUB_DEV_PUBLISH_ACCESS_TOKEN }}",
+          "refreshToken": "${{ secrets.PUB_DEV_PUBLISH_REFRESH_TOKEN }}",
+          "tokenEndpoint": "${{ secrets.PUB_DEV_PUBLISH_TOKEN_ENDPOINT }}",
+          "scopes": [ "openid", "https://www.googleapis.com/auth/userinfo.email" ],
+          "expiration": ${{ secrets.PUB_DEV_PUBLISH_EXPIRATION }},
+        }
+        EOF
+
+    - name: Clean assets
+      run: rm assets/*
+
+    - name: Publish package
+      run: pub publish
+
+  make_release:
+    runs-on: ubuntu-latest
+    needs: [ build, build_examples ]
+    steps:
+      - name: Get all examples
+        uses: actions/download-artifact@v3.0.1
+      
+      - name: Display structure of downloaded files
+        run: ls -R
+
+      - name: Make zip files
+        run: |
+          cd FlutterMediaInfo\ Example\ Ubuntu\ 20.04/
+          zip -vr ../FlutterMediaInfo-Example-Ubuntu-20.04.zip ./*
+          cd ..
+          cd FlutterMediaInfo\ Example\ Ubuntu\ 22.04/
+          zip -vr ../FlutterMediaInfo-Example-Ubuntu-22.04.zip ./*
+          cd ..
+          cd FlutterMediaInfo\ Example\ Windows\ 2019/
+          zip -vr ../FlutterMediaInfo-Example-Windows-2019.zip ./*
+          cd ..
+          cd FlutterMediaInfo\ Example\ Windows\ 2022/
+          zip -vr ../FlutterMediaInfo-Example-Windows-2022.zip ./*
+          cd ..
+          mv ./FlutterMediaInfo\ Example\ macOS\ 11/FlutterMediaInfo\ Example\ macos-11.zip ./FlutterMediaInfo-Example-macOS-11.zip
+          mv ./FlutterMediaInfo\ Example\ macOS\ 12/FlutterMediaInfo\ Example\ macos-12.zip ./FlutterMediaInfo-Example-macOS-12.zip
+
+      - name: Create release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          body: |
+              Changelog: TODO
+          name: '${{ github.event.inputs.version }}'
+          tag_name: '${{ github.event.inputs.version }}'
+          draft: true
+          prerelease: false
+          files: |
+            FlutterMediaInfo-Example-Ubuntu-20.04.zip
+            FlutterMediaInfo-Example-Ubuntu-22.04.zip
+            FlutterMediaInfo-Example-Windows-2019.zip
+            FlutterMediaInfo-Example-Windows-2022.zip
+            FlutterMediaInfo-Example-macOS-11.zip
+            FlutterMediaInfo-Example-macOS-12.zip

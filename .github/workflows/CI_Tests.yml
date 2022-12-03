@@ -2,12 +2,12 @@ name: Build with tests
 
 on:
   push:
-    branches: [ main, dev, bugfix/unicodeCharactersInPath ]
+    branches: [ main, dev ]
   pull_request:
     branches: [ main, dev ]
 
 env:
-  flutter_version: "3.3.7"
+  flutter_version: "3.3.9"
 
 jobs:
   tests:
@@ -22,7 +22,6 @@ jobs:
         - os: ubuntu-22.04
         - os: macos-12
         - os: macos-11
-        - os: macos-10.15
     steps:
       - name: Checkout the code
         uses: actions/checkout@v3.1.0
@@ -33,7 +32,7 @@ jobs:
           flutter-version: ${{ env.flutter_version }}
           channel: 'stable'
           cache: true
-          cache-key: flutter
+          cache-key: flutter-${{ matrix.os }} 
           cache-path: ${{ runner.tool_cache }}/flutter
 
       - name: Restore packages
