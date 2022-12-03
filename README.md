@@ -1,5 +1,5 @@
 # FlutterMediaInfo
-[![pub package](https://img.shields.io/pub/v/flutter_media_info.svg?label=flutter_media_info&color=blue)](https://pub.dev/packages/get) <img alt="GitHub" src="https://img.shields.io/github/license/pcpl2/flutterMediainfo"> [![Tests](https://github.com/pcpl2/flutterMediainfo/actions/workflows/CI_Tests.yml/badge.svg)](https://github.com/pcpl2/flutterMediainfo/actions/workflows/CI_Tests.yml) ![GitHub issues](https://img.shields.io/github/issues/pcpl2/flutterMediainfo)
+[![pub package](https://img.shields.io/pub/v/flutter_media_info.svg?label=flutter_media_info&color=blue)](https://pub.dev/packages/flutter_media_info) ![GitHub](https://img.shields.io/github/license/pcpl2/flutterMediainfo) ![Platform](https://img.shields.io/badge/Platform-LINUX%20%7C%20WINDOWS%20%7C%20MACOS-blue) [![Tests](https://github.com/pcpl2/flutterMediainfo/actions/workflows/CI_Tests.yml/badge.svg)](https://github.com/pcpl2/flutterMediainfo/actions/workflows/CI_Tests.yml) ![GitHub issues](https://img.shields.io/github/issues/pcpl2/flutterMediainfo) [![CodeFactor](https://www.codefactor.io/repository/github/pcpl2/fluttermediainfo/badge)](https://www.codefactor.io/repository/github/pcpl2/fluttermediainfo) ![Pub Points](https://img.shields.io/pub/points/flutter_media_info) ![Pub Popularity](https://img.shields.io/pub/popularity/flutter_media_info) ![Pub Likes](https://img.shields.io/pub/likes/flutter_media_info)
 
 Library for use [LibMediaInfo](https://mediaarea.net/en/MediaInfo) in flutter with support for macos, windows, linux.
 
@@ -9,7 +9,7 @@ Library for use [LibMediaInfo](https://mediaarea.net/en/MediaInfo) in flutter wi
 
 ```yaml
 dependencies:
-  flutter_media_info: ^0.0.1
+  flutter_media_info: ^0.0.2
 ```
 
 
@@ -33,4 +33,4 @@ void printVideoDuration() {
 
 # License
 
-This product uses [MediaInfo](https://mediaarea.net/en/MediaInfo) library, Copyright (c) 2002-2021 [MediaArea.net SARL](mailto:info@mediaarea.net).
+This product uses [MediaInfo](https://mediaarea.net/en/MediaInfo) library, Copyright (c) 2002-2022 [MediaArea.net SARL](mailto:info@mediaarea.net).

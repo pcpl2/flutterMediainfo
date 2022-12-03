@@ -21,7 +21,7 @@ class _MyAppState extends State<MyApp> {
   String _videoDuration = "Missing data";
 
   Future<void> _openMp4File(BuildContext context) async {
-    final XTypeGroup typeGroup = XTypeGroup(
+    const XTypeGroup typeGroup = XTypeGroup(
       label: 'videos',
       extensions: <String>['mp4'],
     );
@@ -49,7 +49,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   void getFileData() {
-    final mi = Mediainfo.init();
+    final mi = Mediainfo();
     mi.quickLoad(_filePath);
 
     final result = mi.getInfo(

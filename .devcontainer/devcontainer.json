@@ -1,0 +1,15 @@
+{
+	"name": "Flutter",
+	"dockerFile": "Dockerfile",
+	// Set *default* container specific settings.json values on container create.
+	"settings": {
+		"terminal.integrated.defaultProfile.linux": "/bin/zsh"
+	},
+	"extensions": [
+		"dart-code.dart-code",
+		"dart-code.flutter",
+		"ms-vscode.cmake-tools",
+		"twxs.cmake"
+	],
+	 "remoteUser": "vscode"
+}

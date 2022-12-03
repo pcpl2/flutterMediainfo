@@ -7,8 +7,7 @@ on:
     branches: [ main ]
 
 env:
-  flutter_version: "2.8.1"
-
+  flutter_version: "3.3.7"
 
 jobs:
   tests:
@@ -20,10 +19,22 @@ jobs:
           build_target: windows
           build_path: build\windows\runner\Release
           target: Windows
+        - os: windows-2022
+          build_target: windows
+          build_path: build\windows\runner\Release
+          target: Windows
         - os: ubuntu-20.04
           build_target: linux
           build_path: build/linux/x64/release/bundle
           target: Linux
+        - os: ubuntu-22.04
+          build_target: linux
+          build_path: build/linux/x64/release/bundle
+          target: Linux
+        - os: macos-12
+          build_target: macos
+          build_path: build/macos/Build/Products/Release
+          target: macOS
         - os: macos-11
           build_target: macos
           build_path: build/macos/Build/Products/Release
@@ -34,24 +45,22 @@ jobs:
           target: macOS
     steps:
       - name: Checkout the code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3.1.0
         
-      - uses: subosito/flutter-action@v1
+      - name: Setup the flutter environment.
+        uses: subosito/flutter-action@v2.8.0
         with:
           flutter-version: ${{ env.flutter_version }}
           channel: 'stable'
+          cache: true
+          cache-key: flutter
+          cache-path: ${{ runner.tool_cache }}/flutter
 
       - name: Enable desktop support ubuntu
         run: | 
           flutter config --enable-linux-desktop
           flutter config --enable-windows-desktop
           flutter config --enable-macos-desktop
-
-      - name: Cache Flutter dependencies
-        uses: actions/cache@v1
-        with:
-          path: ${{ env.PUB_CACHE }}
-          key: ${{ runner.os }}-flutter-dependencies-cache-${{ env.flutter_version }}
 
       - if: matrix.target == 'Linux'
         name: Patch for linux build
@@ -66,6 +75,15 @@ jobs:
 
       - name: Analyze
         run: flutter analyze
+      
+      - if: runner.os == 'macOS' || runner.os == 'Linux'
+        name: Build native utils
+        run: |
+          cd nativeUtils
+          mkdir cmake
+          cd cmake
+          cmake ..
+          make install
 
       - name: Run tests
         run: flutter test --coverage
@@ -82,7 +100,7 @@ jobs:
           dest: FlutterMediaInfo_Example_${{ matrix.target }}.zip
       
       - name: Upload generated application to the artifacts.
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3.1.1
         with:
           name: FlutterMediaInfo Example ${{ matrix.build_target }}
           path: FlutterMediaInfo_Example_${{ matrix.target }}.zip

@@ -11,4 +11,4 @@ PRODUCT_NAME = mediainfo_example
 PRODUCT_BUNDLE_IDENTIFIER = ovh.pcpl2lab.mediainfoExample
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2021 ovh.pcpl2lab. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2021-2022 ovh.pcpl2lab. All rights reserved.
