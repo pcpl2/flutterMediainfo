@@ -51,8 +51,8 @@ jobs:
     #- name: Check Publish Warnings
     #  run: pub publish --dry-run
 
-    - name: Publish Package
-      run: pub publish -f
+    #- name: Publish Package
+    #  run: pub publish -f
 
   make_release:
     runs-on: ubuntu-latest
