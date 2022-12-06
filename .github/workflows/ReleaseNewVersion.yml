@@ -48,8 +48,11 @@ jobs:
     - name: Clean assets
       run: rm assets/*
 
-    - name: Publish package
-      run: pub publish
+    #- name: Check Publish Warnings
+    #  run: pub publish --dry-run
+
+    - name: Publish Package
+      run: pub publish -f
 
   make_release:
     runs-on: ubuntu-latest
