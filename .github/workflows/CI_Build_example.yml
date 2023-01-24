@@ -79,14 +79,20 @@ jobs:
       - name: Analyze
         run: flutter analyze
       
-      - if: runner.os == 'macOS' || runner.os == 'Linux'
-        name: Build native utils
+      - if: runner.os == 'Linux'
+        name: Build native utils (Linux)
         run: |
           cd nativeUtils
           mkdir cmake
           cd cmake
           cmake ..
           make install
+
+      - if: runner.os == 'macOS'
+        name: Build native utils (macOS)
+        run: |
+          cd macos
+          sh buildForMacos.sh
 
       - name: Run tests
         run: flutter test --coverage
