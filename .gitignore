@@ -8,3 +8,4 @@ build/
 coverage/
 nativeUtils/cmake
 nativeUtils/nu_libs
+macos/nu_cmake

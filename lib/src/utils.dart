@@ -68,7 +68,7 @@ String getLibZen({String? customDebugPath}) {
 String getNativeUtilsLib({String? customDebugPath}) {
   if (Platform.isMacOS) {
     if (customDebugPath != null) {
-      return path.join(Directory.current.path, "nativeUtils/libs/libnative_utils.dylib");
+      return path.join(Directory.current.path, "macos/nu_cmake/libnative_utils.dylib");
     } else {
       return path.join(
           path.dirname(path.dirname(Platform.resolvedExecutable)),

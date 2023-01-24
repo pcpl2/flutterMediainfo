@@ -21,6 +21,9 @@ Pod::Spec.new do |s|
     'DEFINES_MODULE' => 'YES',
   }
   s.swift_version = '5.0'
-  s.resources = ['libs/libmediainfo.0.dylib', '../nativeUtils/libs/libnative_utils.dylib']
+  s.prepare_command = <<-CMD
+      sh ./buildForMacos.sh
+    CMD
+  s.resources = ['libs/libmediainfo.0.dylib', 'nu_cmake/libnative_utils.dylib']
   s.xcconfig = { 'LD_RUNPATH_SEARCH_PATHS' => '@loader_path/../Frameworks/flutter_media_info.framework/Resources' }
 end
