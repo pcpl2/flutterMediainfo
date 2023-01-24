@@ -54,8 +54,7 @@ class Mediainfo {
       }
 
       _dllPath = platformDLPath(customDebugPath: customDebugPath);
-      _dylib =
-          DynamicLibrary.open(_dllPath);
+      _dylib = DynamicLibrary.open(_dllPath);
       _loadSymbols(_dylib, customDebugPath: customDebugPath);
     } on Exception catch (e) {
       developer.log(e.toString());
@@ -69,8 +68,7 @@ class Mediainfo {
       }
 
       _dllPath = platformDLPath(customDebugPath: customDebugPath);
-      _dylib =
-          DynamicLibrary.open(_dllPath);
+      _dylib = DynamicLibrary.open(_dllPath);
       _loadSymbols(_dylib, customDebugPath: customDebugPath);
     } on Exception catch (e) {
       developer.log(e.toString());
@@ -97,8 +95,9 @@ class Mediainfo {
     var res = 0;
 
     if (Platform.isMacOS || Platform.isLinux) {
-      final success = _openFileForMI(_dllPath.toNativeUtf8(), _mi!, path.toNativeUtf8());
-      if(success == 0) {
+      final success =
+          _openFileForMI(_dllPath.toNativeUtf8(), _mi!, path.toNativeUtf8());
+      if (success == 0) {
         res = 2; //TODO Add valid file size
       }
     } else {
@@ -194,8 +193,8 @@ class Mediainfo {
 
   void _loadSymbols(DynamicLibrary dylib, {String? customDebugPath}) {
     if (Platform.isMacOS || Platform.isLinux) {
-      final DynamicLibrary nativeAddLib = _dylib =
-          DynamicLibrary.open(getNativeUtilsLib(customDebugPath: customDebugPath));
+      final DynamicLibrary nativeAddLib = _dylib = DynamicLibrary.open(
+          getNativeUtilsLib(customDebugPath: customDebugPath));
       _openFileForMI = nativeAddLib
           .lookup<
               NativeFunction<

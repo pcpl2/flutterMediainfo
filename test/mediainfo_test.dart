@@ -7,7 +7,7 @@ import "package:path/path.dart" as path;
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  
+
   late String debugPath;
 
   if (Platform.isLinux) {

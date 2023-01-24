@@ -246,7 +246,6 @@ typedef MediaInfoCountGetFT = int Function(
   int streamNumber,
 );
 
-
 typedef OpenFileForMediaInfo = int Function(
   Pointer<Utf8> myDlibPath,
   Pointer<Void> handle,
