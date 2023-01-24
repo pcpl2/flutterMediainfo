@@ -1,4 +1,6 @@
 ## 0.0.3
+* Fixed loading dylib on macos in sandbox mode.
+* Added missing script for build macos nativeUtils.
 
 ## 0.0.2
 
