@@ -8,8 +8,8 @@ on:
         required: true
 
 jobs:
-  build_native_utils:
-    uses: pcpl2/flutterMediainfo/.github/workflows/BuildNatives.yml@main
+  #build_native_utils:
+  #  uses: pcpl2/flutterMediainfo/.github/workflows/BuildNatives.yml@main
 
   build_examples:
     uses: pcpl2/flutterMediainfo/.github/workflows/CI_Build_example.yml@main
@@ -23,8 +23,8 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3.1.0
 
-    - name: Make directory for natives
-      run: mkdir -p nativeUtils/libs
+   # - name: Make directory for natives
+   #   run: mkdir -p nativeUtils/libs
 
     - name: Get natives files
       uses: actions/download-artifact@v3.0.1
