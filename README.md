@@ -5,6 +5,11 @@ Library for use [LibMediaInfo](https://mediaarea.net/en/MediaInfo) in flutter wi
 
 ## Get started
 
+### Minimal system requirements
+* Ubuntu 20.04 x64
+* Windows 7 x64
+* macOS 10.10 x64
+
 ### Add dependency
 
 ```yaml
