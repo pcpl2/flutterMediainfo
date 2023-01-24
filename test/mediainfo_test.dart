@@ -28,7 +28,7 @@ void main() {
     final mi = Mediainfo(customDebugPath: debugPath);
     final optionResult = mi.option("Info_Version");
 
-    expect(optionResult, "MediaInfoLib - v22.09");
+    expect(optionResult, "MediaInfoLib - v22.12");
   });
 
   test('mediainfo file inform', () async {
