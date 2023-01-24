@@ -62,7 +62,7 @@ String getNativeUtilsLib({String? customDebugPath}) {
     }
   } else if (Platform.isLinux) {
     if (customDebugPath != null) {
-      return path.join(Directory.current.path, "nativeUtils/libs/libnative_utils.so");
+      return path.join(Directory.current.path, "nativeUtils/nu_libs/libnative_utils.so");
     } else {
       return path.join(Directory.current.path, "libnative_utils.so");
     }

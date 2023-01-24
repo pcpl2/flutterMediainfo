@@ -7,4 +7,4 @@
 build/
 coverage/
 nativeUtils/cmake
-nativeUtils/libs
+nativeUtils/nu_libs
