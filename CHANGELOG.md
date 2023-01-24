@@ -3,6 +3,7 @@
 * Added missing script for build macos nativeUtils.
 * Updated libMediaInfo from v22.09 to v22.12
 * Updated libzen0 from v0.4.39 to v0.4.40
+* Updated loading libMediaInfo dll file on windows
 
 ## 0.0.2
 

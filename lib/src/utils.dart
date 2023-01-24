@@ -29,7 +29,10 @@ String platformDLPath({String? customDebugPath}) {
       if (customDebugPath != null) {
         return "$customDebugPath/$libName.dll";
       } else {
-        return "$libName.dll";
+        return path.join(
+          path.dirname(Platform.resolvedExecutable),
+          '$libName.dll',
+        );
       }
     }
     throw Exception("Platform Not Supported: ${Platform.operatingSystem}");
@@ -47,7 +50,10 @@ String platformDLPath({String? customDebugPath}) {
       );
     }
     if (Platform.isWindows) {
-      return path.join(Directory.current.path, "$libName.dll");
+      return path.join(
+        path.dirname(Platform.resolvedExecutable),
+        '$libName.dll',
+      );
     }
     throw Exception("Platform Not Supported: ${Platform.operatingSystem}");
   }
