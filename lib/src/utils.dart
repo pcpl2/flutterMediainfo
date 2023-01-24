@@ -16,7 +16,13 @@ String platformDLPath({String? customDebugPath}) {
       if (customDebugPath != null) {
         return "$customDebugPath/lib$libName.0.dylib";
       } else {
-        return "lib$libName.0.dylib";
+        return path.join(
+          path.dirname(path.dirname(Platform.resolvedExecutable)),
+          'Frameworks',
+          'flutter_media_info.framework',
+          'Resources',
+          'lib$libName.0.dylib',
+        );
       }
     }
     if (Platform.isWindows) {
@@ -32,7 +38,13 @@ String platformDLPath({String? customDebugPath}) {
       return path.join(Directory.current.path, "lib$libName.so");
     }
     if (Platform.isMacOS || Platform.isIOS) {
-      return path.join(Directory.current.path, "lib$libName.0.dylib");
+      return path.join(
+          path.dirname(path.dirname(Platform.resolvedExecutable)),
+          'Frameworks',
+          'flutter_media_info.framework',
+          'Resources',
+          'lib$libName.0.dylib',
+        );
     }
     if (Platform.isWindows) {
       return path.join(Directory.current.path, "$libName.dll");
@@ -58,7 +70,13 @@ String getNativeUtilsLib({String? customDebugPath}) {
     if (customDebugPath != null) {
       return path.join(Directory.current.path, "nativeUtils/libs/libnative_utils.dylib");
     } else {
-      return path.join(Directory.current.path, "libnative_utils.dylib");
+      return path.join(
+          path.dirname(path.dirname(Platform.resolvedExecutable)),
+          'Frameworks',
+          'flutter_media_info.framework',
+          'Resources',
+          'libnative_utils.dylib',
+        );
     }
   } else if (Platform.isLinux) {
     if (customDebugPath != null) {
