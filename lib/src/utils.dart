@@ -5,7 +5,7 @@ import "package:path/path.dart" as path;
 String platformDLPath({String? customDebugPath}) {
   const libName = "mediainfo";
   if (kDebugMode) {
-    if (Platform.isLinux || Platform.isAndroid) {
+    if (Platform.isLinux) {
       if (customDebugPath != null) {
         return "$customDebugPath/lib$libName.so";
       } else {
@@ -37,8 +37,11 @@ String platformDLPath({String? customDebugPath}) {
     }
     throw Exception("Platform Not Supported: ${Platform.operatingSystem}");
   } else {
-    if (Platform.isLinux || Platform.isAndroid) {
-      return path.join(Directory.current.path, "lib$libName.so");
+    if (Platform.isLinux) {
+        return path.join(
+          path.dirname(Platform.resolvedExecutable),
+          "lib$libName.so",
+        );
     }
     if (Platform.isMacOS || Platform.isIOS) {
       return path.join(
@@ -64,7 +67,10 @@ String getLibZen({String? customDebugPath}) {
     if (customDebugPath != null) {
       return path.join(Directory.current.path, "$customDebugPath/libzen.so.0");
     } else {
-      return path.join(Directory.current.path, "libzen.so.0");
+      return path.join(
+          path.dirname(Platform.resolvedExecutable),
+          "libzen.so.0",
+        );
     }
   }
   throw Exception("Platform Not Supported: ${Platform.operatingSystem}");
@@ -89,7 +95,7 @@ String getNativeUtilsLib({String? customDebugPath}) {
       return path.join(
           Directory.current.path, "nativeUtils/nu_libs/libnative_utils.so");
     } else {
-      return path.join(Directory.current.path, "libnative_utils.so");
+      return path.join(path.dirname(Platform.resolvedExecutable), "libnative_utils.so");
     }
   }
   throw Exception("Platform Not Supported: ${Platform.operatingSystem}");

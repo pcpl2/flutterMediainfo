@@ -7,4 +7,4 @@ find_package(${PROJECT_NAME})
 add_library(${PROJECT_NAME} SHARED ../nativeUtils/FileOpen.cpp)
 target_link_libraries ( ${PROJECT_NAME} ${nativeUtils_LIBRARIES} )
 
-install(TARGETS ${PROJECT_NAME} DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/../nu_libs")
+install(TARGETS ${PROJECT_NAME} DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/../nativeUtils/nu_libs")

@@ -24,6 +24,9 @@ set(flutter_media_info_bundled_libraries
   PARENT_SCOPE
 )
 
+add_subdirectory ("${CMAKE_CURRENT_SOURCE_DIR}/../nativeUtils" 
+"${CMAKE_CURRENT_BINARY_DIR}/nativeUtils")
+
 set(BUILD_BUNDLE_DIR "${PROJECT_BINARY_DIR}/../../bundle")
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
     set(CMAKE_INSTALL_PREFIX "${BUILD_BUNDLE_DIR}" CACHE PATH "..." FORCE)
@@ -33,7 +36,7 @@ set(INSTALL_BUNDLE_LIB_DIR "${CMAKE_INSTALL_PREFIX}")
 set(MediaInfo_BRIDGE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/libs/libmediainfo.so")
 set(LibZen_BRIDGE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/libs/libzen.so.0")
 set(LibMMS_BRIDGE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/libs/libmms.so.0")
-set(LibNativeUtils_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../nativeUtils/nu_libs/libnative_utils.so")
+set(LibNativeUtils_PATH "${CMAKE_CURRENT_BINARY_DIR}/nativeUtils/libnative_utils.so")
 
 install(CODE "file(REMOVE_RECURSE \"${INSTALL_BUNDLE_LIB_DIR}/libmediainfo.so\")" COMPONENT Runtime)
 install(CODE "file(REMOVE_RECURSE \"${INSTALL_BUNDLE_LIB_DIR}/libzen.so.0\")" COMPONENT Runtime)
