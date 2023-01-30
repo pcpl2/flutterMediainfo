@@ -14,7 +14,7 @@ Library for use [LibMediaInfo](https://mediaarea.net/en/MediaInfo) in flutter wi
 
 ```yaml
 dependencies:
-  flutter_media_info: ^0.0.2
+  flutter_media_info: ^0.0.3
 ```
 
 
@@ -38,4 +38,4 @@ void printVideoDuration() {
 
 # License
 
-This product uses [MediaInfo](https://mediaarea.net/en/MediaInfo) library, Copyright (c) 2002-2022 [MediaArea.net SARL](mailto:info@mediaarea.net).
+This product uses [MediaInfo](https://mediaarea.net/en/MediaInfo) library, Copyright (c) 2002-2023 [MediaArea.net SARL](mailto:info@mediaarea.net).

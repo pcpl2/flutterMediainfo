@@ -1,7 +1,7 @@
 PODS:
   - file_selector_macos (0.0.1):
     - FlutterMacOS
-  - flutter_media_info (0.0.2):
+  - flutter_media_info (0.0.3):
     - FlutterMacOS
   - FlutterMacOS (1.0.0)
 

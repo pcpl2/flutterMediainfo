@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'flutter_media_info'
-  s.version          = '0.0.2'
+  s.version          = '0.0.3'
   s.summary          = 'Library for use LibMediaInfo in flutter with support for macos, windows, linux.'
   s.description      = <<-DESC
   Library for use LibMediaInfo in flutter with support for macos, windows, linux.
