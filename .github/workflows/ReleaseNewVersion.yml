@@ -16,7 +16,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    needs: build_native_utils
+    #needs: build_native_utils
     container:
       image:  google/dart:latest
     steps:
