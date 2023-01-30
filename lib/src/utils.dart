@@ -38,10 +38,10 @@ String platformDLPath({String? customDebugPath}) {
     throw Exception("Platform Not Supported: ${Platform.operatingSystem}");
   } else {
     if (Platform.isLinux) {
-        return path.join(
-          path.dirname(Platform.resolvedExecutable),
-          "lib$libName.so",
-        );
+      return path.join(
+        path.dirname(Platform.resolvedExecutable),
+        "lib$libName.so",
+      );
     }
     if (Platform.isMacOS || Platform.isIOS) {
       return path.join(
@@ -68,9 +68,9 @@ String getLibZen({String? customDebugPath}) {
       return path.join(Directory.current.path, "$customDebugPath/libzen.so.0");
     } else {
       return path.join(
-          path.dirname(Platform.resolvedExecutable),
-          "libzen.so.0",
-        );
+        path.dirname(Platform.resolvedExecutable),
+        "libzen.so.0",
+      );
     }
   }
   throw Exception("Platform Not Supported: ${Platform.operatingSystem}");
@@ -95,7 +95,8 @@ String getNativeUtilsLib({String? customDebugPath}) {
       return path.join(
           Directory.current.path, "nativeUtils/nu_libs/libnative_utils.so");
     } else {
-      return path.join(path.dirname(Platform.resolvedExecutable), "libnative_utils.so");
+      return path.join(
+          path.dirname(Platform.resolvedExecutable), "libnative_utils.so");
     }
   }
   throw Exception("Platform Not Supported: ${Platform.operatingSystem}");
