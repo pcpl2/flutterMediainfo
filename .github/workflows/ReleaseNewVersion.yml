@@ -26,11 +26,11 @@ jobs:
    # - name: Make directory for natives
    #   run: mkdir -p nativeUtils/libs
 
-    - name: Get natives files
-      uses: actions/download-artifact@v3.0.1
-      with:
-        name: natives.zip
-        path: ./nativeUtils/libs
+    #- name: Get natives files
+    #  uses: actions/download-artifact@v3.0.1
+    #  with:
+    #    name: natives.zip
+    #    path: ./nativeUtils/libs
 
     - name: Setup credentials
       run: | 
