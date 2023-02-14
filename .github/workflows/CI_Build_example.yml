@@ -1,4 +1,4 @@
-name: CI_Build_Example
+name: Build example app
 
 on:
   push:
