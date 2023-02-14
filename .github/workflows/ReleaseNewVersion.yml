@@ -18,8 +18,8 @@ jobs:
     name: Send library to pub.dev
     runs-on: ubuntu-latest
     #needs: build_native_utils
-    #container:
-    #  image:  google/dart:latest
+    container:
+      image:  google/dart:latest
     permissions:
       id-token: write # This is required for authentication using OIDC
     steps:
@@ -51,7 +51,7 @@ jobs:
     - name: Clean assets
       run: rm assets/*
 
-    - uses: dart-lang/setup-dart@v1
+    #- uses: dart-lang/setup-dart@v1
     
     #- name: Install dependencies
     #  run: dart pub get
