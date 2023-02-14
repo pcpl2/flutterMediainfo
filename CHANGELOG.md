@@ -1,6 +1,8 @@
 ## 0.0.4
-* Fixed build macos nativeUtils on Apple M1 cpu for x64 cpu.
-* Added information in the readme file about the requirement to have `cmake` in the system.
+* Fixed build macos nativeUtils on Apple M1 cpu for x64 cpu
+* Added information in the readme file about the requirement to have `cmake` in the system
+* Documentation has been supplemented
+* Added missing mediaInfoDomain in `MediaInfoInfoType`
 
 ## 0.0.3
 * Fixed loading dylib on macos in sandbox mode.
