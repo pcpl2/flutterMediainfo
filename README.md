@@ -8,7 +8,7 @@ Library for use [LibMediaInfo](https://mediaarea.net/en/MediaInfo) in flutter wi
 ### Minimal system requirements
 * Ubuntu 20.04 x64
 * Windows 7 x64
-* macOS 10.10 x64
+* macOS 10.10 x64 (Running on Rosetta 2 is not working currently)
 
 
 ### Requirements
