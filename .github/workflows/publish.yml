@@ -1,0 +1,32 @@
+name: Publish to pub.dev
+
+on:
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+*'
+
+env:
+  flutter_version: "3.3.9"
+
+jobs:
+  publish:
+    #container:
+    #  image:  google/dart:latest
+    permissions:
+      id-token: write # This is required for authentication using OIDC
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3.1.0
+      - uses: dart-lang/setup-dart@v1
+      - name: Setup the flutter environment.
+        uses: subosito/flutter-action@v2.8.0
+        with:
+          flutter-version: ${{ env.flutter_version }}
+          channel: 'stable'
+          cache: true
+          cache-key: flutter-${{ matrix.os }} 
+          cache-path: ${{ runner.tool_cache }}/flutter
+      #- name: Install dependencies
+      #  run: pub get
+      - name: Publish
+        run: flutter pub publish --force
