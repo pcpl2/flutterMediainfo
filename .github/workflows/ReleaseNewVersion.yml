@@ -50,8 +50,8 @@ jobs:
 
     - uses: dart-lang/setup-dart@v1
     
-    - name: Install dependencies
-      run: dart pub get
+    #- name: Install dependencies
+    #  run: dart pub get
     #- name: Check Publish Warnings
     #  run: pub publish --dry-run
 
