@@ -10,6 +10,10 @@ Library for use [LibMediaInfo](https://mediaarea.net/en/MediaInfo) in flutter wi
 * Windows 7 x64
 * macOS 10.10 x64
 
+
+### Requirements
+For use this package you must have installed `camke` in your development/build system on all platforms.
+
 ### Add dependency
 
 ```yaml
