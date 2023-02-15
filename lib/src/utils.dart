@@ -1,5 +1,7 @@
-import "dart:io" show Directory, Platform;
+// ignore_for_file: public_member_api_docs
+import "dart:io" show Directory, Platform, Process;
 import 'package:flutter/foundation.dart';
+import "package:flutter_media_info/src/models/cpu_architecture.dart";
 import "package:path/path.dart" as path;
 
 String platformDLPath({String? customDebugPath}) {
@@ -100,4 +102,32 @@ String getNativeUtilsLib({String? customDebugPath}) {
     }
   }
   throw Exception("Platform Not Supported: ${Platform.operatingSystem}");
+}
+
+String? getRawCpuArch() {
+  switch (Platform.operatingSystem) {
+    case "android":
+    case "linux":
+    case "macos":
+      try {
+        final res = Process.runSync('uname', ["-m"], runInShell: false);
+        if (res.exitCode != 0) {
+          return null;
+        }
+        return res.stdout.toString().trim();
+      } catch (e) {
+        return null;
+      }
+    case "windows":
+      return Platform.environment['PROCESSOR_ARCHITECTURE'];
+  }
+  return null;
+}
+
+CpuArchitecture getCpuArch() {
+  final cpuArchRaw = getRawCpuArch();
+  if (cpuArchRaw == null) {
+    return CpuArchitecture.unknown;
+  }
+  return CpuArchitectureFactory().fromString(cpuArchRaw);
 }
