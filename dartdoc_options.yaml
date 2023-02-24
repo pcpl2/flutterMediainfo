@@ -1,0 +1,2 @@
+dartdoc:
+  nodoc: [ 'lib/src/models/media_info_functions.dart' ]
