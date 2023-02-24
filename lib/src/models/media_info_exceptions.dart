@@ -1,7 +1,8 @@
-/// Exception thrown when media info instance is not exist 
+/// Exception thrown when media info instance is not exist
 class NotLoadedMediaInfoInstance implements Exception {
   NotLoadedMediaInfoInstance();
 }
+
 /// Exception thrown when media info instance is exist
 class MediaInfoInstanceHasExists implements Exception {
   MediaInfoInstanceHasExists();

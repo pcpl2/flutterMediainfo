@@ -1,4 +1,3 @@
-
 /// Media info Stream types
 enum MediaInfoStreamType {
   // General data | StreamKind = General.

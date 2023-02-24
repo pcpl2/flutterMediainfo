@@ -10,14 +10,14 @@ void main() {
   test('get raw cpu arch', () async {
     final cpuRawArch = getRawCpuArch();
     expect(cpuRawArch, isNot(null));
-    if(Platform.isWindows) {
+    if (Platform.isWindows) {
       expect(cpuRawArch, "AMD64");
     } else {
       expect(cpuRawArch, "x86_64");
     }
   });
 
-test('get cpu arch enum', () async {
+  test('get cpu arch enum', () async {
     final cpuArch = getCpuArch();
     expect(cpuArch, CpuArchitecture.x86_64);
   });
