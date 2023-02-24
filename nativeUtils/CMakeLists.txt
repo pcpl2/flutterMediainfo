@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-set(PROJECT_NAME "native_utils")
+set(PROJECT_NAME "nativeUtils")
 set(CMAKE_OSX_ARCHITECTURES "x86_64;arm64" CACHE STRING "" FORCE)
 project(${PROJECT_NAME} LANGUAGES CXX)
 

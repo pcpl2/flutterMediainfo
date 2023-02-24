@@ -24,6 +24,6 @@ Pod::Spec.new do |s|
   s.prepare_command = <<-CMD
       sh ./buildForMacos.sh
     CMD
-  s.resources = ['libs/libmediainfo.0.dylib', 'nu_cmake/libnative_utils.dylib']
+  s.resources = ['libs/libmediainfo.0.dylib', 'nu_cmake/libnativeUtils.dylib ']
   s.xcconfig = { 'LD_RUNPATH_SEARCH_PATHS' => '@loader_path/../Frameworks/flutter_media_info.framework/Resources' }
 end

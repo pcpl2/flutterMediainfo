@@ -82,23 +82,23 @@ String getNativeUtilsLib({String? customDebugPath}) {
   if (Platform.isMacOS) {
     if (customDebugPath != null) {
       return path.join(
-          Directory.current.path, "macos/nu_cmake/libnative_utils.dylib");
+          Directory.current.path, "macos/nu_cmake/libnativeUtils.dylib");
     } else {
       return path.join(
         path.dirname(path.dirname(Platform.resolvedExecutable)),
         'Frameworks',
         'flutter_media_info.framework',
         'Resources',
-        'libnative_utils.dylib',
+        'libnativeUtils.dylib',
       );
     }
   } else if (Platform.isLinux) {
     if (customDebugPath != null) {
       return path.join(
-          Directory.current.path, "nativeUtils/nu_libs/libnative_utils.so");
+          Directory.current.path, "nativeUtils/nu_libs/libnativeUtils.so");
     } else {
       return path.join(
-          path.dirname(Platform.resolvedExecutable), "libnative_utils.so");
+          path.dirname(Platform.resolvedExecutable), "libnativeUtils.so");
     }
   }
   throw Exception("Platform Not Supported: ${Platform.operatingSystem}");
