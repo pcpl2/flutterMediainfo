@@ -47,6 +47,7 @@ jobs:
           tag_name: '${{ github.event.inputs.version }}'
           draft: true
           prerelease: false
+          target_commitish: ${{ github.sha }}
           files: |
             FlutterMediaInfo-Example-Ubuntu-20.04.zip
             FlutterMediaInfo-Example-Ubuntu-22.04.zip
