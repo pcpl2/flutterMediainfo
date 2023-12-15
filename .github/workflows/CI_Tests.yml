@@ -2,12 +2,12 @@ name: Build with tests
 
 on:
   push:
-    branches: [ main, dev ]
+    branches: [ main, dev, feature/* ]
   pull_request:
-    branches: [ main, dev ]
+    branches: [ main, dev, feature/* ]
 
 env:
-  flutter_version: "3.3.9"
+  flutter_version: "3.16.4"
 
 jobs:
   tests:

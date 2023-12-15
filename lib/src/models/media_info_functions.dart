@@ -1,4 +1,5 @@
 /// ignore_for_file: public_member_api_docs @nodoc
+library;
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';

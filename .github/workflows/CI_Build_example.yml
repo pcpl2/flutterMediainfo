@@ -8,7 +8,7 @@ on:
   workflow_call:
 
 env:
-  flutter_version: "3.3.9"
+  flutter_version: "3.16.4"
 
 jobs:
   tests:
